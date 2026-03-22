@@ -1,0 +1,86 @@
+slug,name,tier,phase,cost_usd,exchange_rate,import_cost_usd,total_cost_usd,suggested_price_usd,margin_pct,suggested_price_dop,notes
+usb-rubber-ducky,USB Rubber Ducky,entry,1,49.99,62,8.00,57.99,89.00,53,5518,Hak5 official price ~$50 USD
+bash-bunny,Bash Bunny,entry,1,99.99,62,12.00,111.99,149.00,33,9238,Hak5 ~$100 USD
+malduino,Malduino,entry,1,15.00,62,4.00,19.00,35.00,84,2170,Very low cost, high margin
+digispark-usb,Digispark USB,entry,1,3.00,62,1.50,4.50,12.00,167,744,Bulk buy from AliExpress
+keystroke-injector-usb,Keystroke Injector USB,entry,1,10.00,62,3.00,13.00,28.00,115,1736,Generic HID injector
+alfa-awus036ach,Alfa AWUS036ACH,entry,1,30.00,62,5.00,35.00,55.00,57,3410,Amazon ~$30 USD
+alfa-awus036nha,Alfa AWUS036NHA,entry,1,22.00,62,4.00,26.00,42.00,62,2604,Amazon ~$22 USD
+tp-link-wn722n,TP-Link TL-WN722N v1,entry,1,12.00,62,2.50,14.50,22.00,52,1364,Must be v1 for monitor mode
+usb-data-blocker,USB Data Blocker,entry,1,6.00,62,1.50,7.50,14.00,87,868,Very high margin item
+faraday-bag,Faraday Bag,entry,1,10.00,62,2.50,12.50,25.00,100,1550,Good margin, high demand
+faraday-box,Faraday Box,entry,1,28.00,62,6.00,34.00,65.00,91,4030,Less common, good margin
+encrypted-usb-drive,Encrypted USB Drive,entry,1,28.00,62,5.00,33.00,60.00,82,3720,IronKey / Kingston ~$28 USD
+hardware-password-manager,Hardware Password Manager,entry,1,22.00,62,4.00,26.00,52.00,100,3224,Decent margin
+laptop-privacy-screen,Laptop Privacy Screen,entry,1,12.00,62,2.50,14.50,30.00,107,1860,Good volume product
+webcam-cover-slider,Webcam Cover Slider,entry,1,1.50,62,0.50,2.00,8.00,300,496,Pack of 3, extreme margin
+rf-signal-detector,RF Signal Detector,entry,1,18.00,62,4.00,22.00,48.00,118,2976,Counter-surveillance demand
+hidden-camera-detector,Hidden Camera Detector,entry,1,15.00,62,3.50,18.50,42.00,127,2604,High demand locally
+anti-spy-detector,Anti Spy Detector,entry,1,22.00,62,4.50,26.50,58.00,119,3596,Bundle potential
+secure-charging-cable,Secure Charging Cable,entry,1,5.00,62,1.50,6.50,16.00,146,992,High margin, low cost
+usb-power-monitor,USB Power Monitor,entry,1,7.00,62,2.00,9.00,20.00,122,1240,Good volume item
+portable-secure-power-bank,Portable Secure Power Bank,entry,1,18.00,62,5.00,23.00,45.00,96,2790,Decent margin
+acr122u-nfc-reader,ACR122U NFC Reader,entry,1,18.00,62,4.00,22.00,38.00,73,2356,Standard NFC tool
+rfid-cloner-kit,RFID Cloner Kit,entry,1,12.00,62,3.00,15.00,32.00,113,1984,High margin bundle potential
+rtl-sdr-dongle,RTL-SDR Dongle,entry,1,22.00,62,4.00,26.00,42.00,62,2604,RTL-SDR Blog v4 ~$22 USD
+lora-dev-board,LoRa Dev Board,entry,1,10.00,62,2.50,12.50,24.00,92,1488,Good IoT learning product
+esp8266-nodemcu,ESP8266 NodeMCU,entry,1,3.50,62,1.00,4.50,10.00,122,620,Bulk buy recommended
+esp32-dev-kit,ESP32 Dev Kit,entry,1,5.00,62,1.50,6.50,14.00,115,868,Bulk buy recommended
+flipper-zero,Flipper Zero,mid,2,169.00,62,20.00,189.00,229.00,21,14198,Official shop $169 USD. Low margin but high demand
+pwnagotchi-kit,Pwnagotchi Kit,mid,2,35.00,62,10.00,45.00,99.00,120,6138,Assembled locally = big margin
+raspberry-pi-4-4gb,Raspberry Pi 4 (4GB),mid,2,55.00,62,8.00,63.00,89.00,41,5518,RPi supply varies
+raspberry-pi-5-8gb,Raspberry Pi 5 (8GB),mid,2,80.00,62,10.00,90.00,119.00,32,7378,Latest gen premium
+raspberry-pi-zero-w,Raspberry Pi Zero W,mid,2,15.00,62,3.00,18.00,28.00,56,1736,
+beaglebone-black,BeagleBone Black,mid,2,45.00,62,7.00,52.00,79.00,52,4898,
+intel-nuc-mini-pc,Intel NUC Mini PC,mid,2,180.00,62,22.00,202.00,295.00,46,18290,High AOV product
+proxmark3-rdv4,Proxmark3 RDV4,mid,2,230.00,62,25.00,255.00,349.00,37,21638,Proxmark shop ~$230 USD
+chameleon-ultra,Chameleon Ultra,mid,2,120.00,62,15.00,135.00,189.00,40,11718,
+hackrf-one,HackRF One,mid,2,229.00,62,25.00,254.00,349.00,37,21638,Great Scot Gadgets ~$229 USD
+ubertooth-one,Ubertooth One,mid,2,99.00,62,12.00,111.00,149.00,34,9238,
+yard-stick-one,Yard Stick One,mid,2,79.00,62,10.00,89.00,119.00,34,7378,
+bluetooth-sniffer,Bluetooth Sniffer,mid,2,30.00,62,5.00,35.00,59.00,69,3658,
+zigbee-sniffer,Zigbee Sniffer,mid,2,28.00,62,5.00,33.00,55.00,67,3410,
+drone-signal-analyzer,Drone Signal Analyzer,mid,2,85.00,62,12.00,97.00,155.00,60,9610,
+wifi-pineapple,WiFi Pineapple,mid,2,199.00,62,22.00,221.00,289.00,31,17918,Hak5 ~$199 USD
+lan-turtle,LAN Turtle,mid,2,59.99,62,8.00,67.99,99.00,46,6138,Hak5 ~$60 USD
+packet-squirrel,Packet Squirrel,mid,2,59.99,62,8.00,67.99,99.00,46,6138,
+shark-jack,Shark Jack,mid,2,59.99,62,8.00,67.99,99.00,46,6138,
+plunder-bug,Plunder Bug,entry,2,29.99,62,5.00,34.99,55.00,57,3410,
+network-tap-hardware,Network Tap Hardware,entry,2,32.00,62,5.00,37.00,62.00,68,3844,
+network-packet-analyzer-device,Network Packet Analyzer Device,mid,2,120.00,62,15.00,135.00,199.00,47,12338,
+yubikey-5-nfc,YubiKey 5 NFC,entry,2,45.00,62,6.00,51.00,72.00,41,4464,Yubico official ~$45 USD
+solokey-security-key,SoloKey Security Key,entry,2,20.00,62,4.00,24.00,38.00,58,2356,
+nitrokey-pro-2,Nitrokey Pro 2,mid,2,55.00,62,7.00,62.00,89.00,44,5518,
+nitrokey-storage-2,Nitrokey Storage 2,mid,2,79.00,62,9.00,88.00,129.00,47,7998,
+key-croc,Key Croc,mid,2,79.99,62,10.00,89.99,129.00,43,7998,Hak5 ~$80 USD
+screen-crab,Screen Crab,mid,2,119.99,62,14.00,133.99,189.00,41,11718,Hak5 ~$120 USD
+deauther-watch,Deauther Watch,mid,2,28.00,62,5.00,33.00,55.00,67,3410,DSTIKE ~$28 USD
+dstike-deauther-oled,DSTIKE Deauther OLED,entry,2,18.00,62,3.50,21.50,36.00,67,2232,
+kit-bug-bounty-starter,Kit: Bug Bounty Starter,pro,3,290.00,62,35.00,325.00,479.00,47,29698,Bundle discount applied
+kit-red-team-physical,Kit: Red Team Physical,pro,3,530.00,62,55.00,585.00,849.00,45,52638,Flagship bundle
+kit-full-sdr-lab,Kit: Full SDR Lab,pro,3,480.00,62,50.00,530.00,749.00,41,46438,
+kit-iot-security-testing,Kit: IoT Security Testing,pro,3,190.00,62,25.00,215.00,349.00,62,21638,
+glinet-travel-router,GL.iNet Travel Router,mid,3,38.00,62,6.00,44.00,69.00,57,4278,Amazon ~$38 USD
+openwrt-router,OpenWRT Router,mid,3,55.00,62,8.00,63.00,99.00,57,6138,
+hardware-firewall-appliance,Hardware Firewall Appliance,pro,3,140.00,62,18.00,158.00,249.00,58,15438,Protectli / Qotom ~$140 USD
+portable-vpn-router,Portable VPN Router,mid,3,42.00,62,6.00,48.00,79.00,65,4898,GL.iNet Beryl ~$42 USD
+secure-kvm-switch,Secure KVM Switch,pro,3,110.00,62,14.00,124.00,199.00,60,12338,
+logic-analyzer-usb,Logic Analyzer USB,mid,3,18.00,62,3.50,21.50,42.00,95,2604,Saleae clone ~$18 USD
+jtag-debugger,JTAG Debugger,mid,3,22.00,62,4.00,26.00,52.00,100,3224,
+eeprom-programmer,EEPROM Programmer,mid,3,12.00,62,3.00,15.00,32.00,113,1984,
+bios-flash-programmer-ch341a,BIOS Flash Programmer CH341A,entry,3,5.00,62,1.50,6.50,14.00,115,868,Extreme margin
+usb-protocol-analyzer,USB Protocol Analyzer,mid,3,60.00,62,8.00,68.00,109.00,60,6758,
+nvidia-jetson-nano,NVIDIA Jetson Nano,pro,3,99.00,62,15.00,114.00,179.00,57,11098,Supply limited
+usb-armory-mk-ii,USB Armory Mk II,pro,3,110.00,62,14.00,124.00,199.00,60,12338,
+scada-test-device,SCADA Test Device,pro,3,240.00,62,30.00,270.00,449.00,66,27838,Niche but high margin
+iot-security-testing-kit,IoT Security Testing Kit,pro,3,250.00,62,35.00,285.00,449.00,58,27838,
+smart-home-pentest-kit,Smart Home Pentest Kit,pro,3,110.00,62,18.00,128.00,225.00,76,13950,
+thermal-camera-module,Thermal Camera Module,mid,3,45.00,62,7.00,52.00,99.00,90,6138,
+ir-blaster-receiver-kit,IR Blaster + Receiver Kit,entry,3,6.00,62,1.50,7.50,18.00,140,1116,
+universal-remote-hacking-device,Universal Remote Hacking Device,mid,3,28.00,62,5.00,33.00,62.00,88,3844,
+sim-card-reader-writer,SIM Card Reader/Writer,mid,3,18.00,62,3.50,21.50,42.00,95,2604,
+lock-pick-set,Lock Pick Set (professional),mid,3,22.00,62,4.00,26.00,55.00,112,3410,
+digital-door-lock-tester,Digital Door Lock Tester,pro,3,70.00,62,10.00,80.00,145.00,81,8990,
+key-decoder-tool,Key Decoder Tool,mid,3,35.00,62,6.00,41.00,79.00,93,4898,
+multiport-usb-data-switch,Multiport USB Data Switch,entry,3,14.00,62,3.00,17.00,34.00,100,2108,
+industrial-network-sniffer,Industrial Network Sniffer,pro,3,280.00,62,35.00,315.00,529.00,68,32798,

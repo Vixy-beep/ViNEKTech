@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ product.localized_name }} | ViNEK TECH{% endblock %}
+{% block meta_description %}{{ product.get_meta_description }}{% endblock %}
+{% block og_title %}{{ product.get_meta_title }}{% endblock %}
+{% block og_description %}{{ product.get_meta_description }}{% endblock %}
+
+{% block extra_head %}
+<script type="application/ld+json">{{ json_ld|safe }}</script>
+{% endblock %}
+
+{% block content %}
+<section class="container detail-layout">
+    <article class="content-panel">
+        <span class="tier-badge">{{ product.get_tier_display }}</span>
+        <h1 class="panel-title">{{ product.localized_name }}</h1>
+        <p>{{ product.localized_description }}</p>
+        {% if product.compare_at_price %}
+            <p class="compare-price">Precio regular RD$ {{ product.compare_at_price }}</p>
+        {% endif %}
+
+        {% if product.declaration_required %}
+            <div class="tech-card">
+                <strong>Declaracion de uso requerida</strong>
+                <p>Este producto requiere confirmacion de uso profesional, educativo o de auditoria autorizada durante el pago.</p>
+                {% if product.use_case_declaration %}
+                    <p><em>{{ product.use_case_declaration }}</em></p>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        <div class="inline-actions">
+            {% if product.in_stock %}
+                <a class="btn" href="{% url 'cart:add' product.id %}">Agregar al carrito</a>
+            {% else %}
+                <span class="tag-out">Sin stock</span>
+            {% endif %}
+            <a class="btn btn-outline" href="{% url 'store:catalog' %}">Volver</a>
+        </div>
+
+        {% if product.variants.exists %}
+            <div class="tech-card" style="margin-top:16px;">
+                <strong>Variantes disponibles</strong>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>SKU</th>
+                            <th>Variante</th>
+                            <th>Precio</th>
+                            <th>Stock</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for variant in product.variants.all %}
+                            {% if variant.active %}
+                                <tr>
+                                    <td>{{ variant.sku }}</td>
+                                    <td>{{ variant.title }}</td>
+                                    <td>RD$ {{ variant.price_dop_value }}</td>
+                                    <td>{{ variant.stock }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+    </article>
+
+    <aside class="form-panel">
+        <h3 class="panel-title">Resumen</h3>
+        <p><strong>Precio:</strong> RD$ {{ product.price_dop_value }}</p>
+        <p><strong>Stock:</strong>
+            {% if product.in_stock %}
+                <span class="tag-ok">Disponible ({{ product.available_stock }})</span>
+            {% else %}
+                <span class="tag-out">Agotado</span>
+            {% endif %}
+        </p>
+        <p><strong>Categoria:</strong> {{ product.category.name }}</p>
+        {% if product.is_bestseller %}
+            <p class="tag-ok">Producto bestseller</p>
+        {% endif %}
+    </aside>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="section-head"><h2>Relacionados</h2></div>
+        <div class="grid-products">
+            {% for product in related_products %}
+                {% include 'components/product_card.html' %}
+            {% empty %}
+                <p>No hay productos relacionados.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

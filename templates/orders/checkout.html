@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Pago | ViNEK TECH{% endblock %}
+
+{% block content %}
+<section class="container checkout-layout">
+    <article class="form-panel">
+        <h1 class="panel-title">Pago seguro</h1>
+        <form method="post">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                <div class="flash">{{ form.non_field_errors }}</div>
+            {% endif %}
+
+            <div class="form-row"><label>Nombre</label>{{ form.full_name }}</div>
+            <div class="form-row"><label>Email</label>{{ form.email }}</div>
+            <div class="form-row"><label>Telefono</label>{{ form.phone }}</div>
+            <div class="form-row"><label>Direccion</label>{{ form.shipping_address }}</div>
+            <div class="form-row"><label>Ciudad</label>{{ form.city }}</div>
+            <div class="form-row"><label>Pais</label>{{ form.country }}</div>
+            <div class="form-row"><label>Zona de envio</label>{{ form.shipping_zone }}</div>
+            <div class="form-row"><label>Cupon</label>{{ form.coupon_code }}</div>
+
+            {% if sensitive_items %}
+                <div class="tech-card">
+                    <p><strong>Declaracion obligatoria:</strong> confirmo que los productos se usaran para fines legales, educativos o de auditoria autorizada.</p>
+                    <label>{{ form.declaration_accepted }} Acepto la declaracion de uso</label>
+                </div>
+            {% endif %}
+            <button class="btn" type="submit">Confirmar pedido</button>
+        </form>
+    </article>
+
+    <aside class="content-panel">
+        <h3 class="panel-title">Orden</h3>
+        <table class="table">
+            {% for item in items %}
+                <tr>
+                    <td>{{ item.product.name }} x {{ item.quantity }}</td>
+                    <td>RD$ {{ item.line_total }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <p>Subtotal: RD$ {{ subtotal }}</p>
+        <p>Envio: RD$ {{ shipping }}</p>
+        <p>Envio gratis desde RD$ 5,000</p>
+        <p><strong>Total: RD$ {{ total }}</strong></p>
+    </aside>
+</section>
+{% endblock %}

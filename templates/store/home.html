@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title %}ViNEK TECH | Tienda Cyber{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="container hero-grid">
+        <div>
+            <h1>Construye tu <span class="neon">Laboratorio Cyber</span><br>con tecnologia de elite</h1>
+            <p>Equipos, gadgets y herramientas para profesionales de seguridad, equipos de IT y creadores técnicos que quieren rendimiento real.</p>
+            <div class="inline-actions">
+                <a class="btn" href="{% url 'store:catalog' %}">Explorar catalogo</a>
+                <a class="btn btn-outline" href="{% url 'orders:checkout' %}">Ir a pago</a>
+            </div>
+            <div class="trust-row">
+                <span>Pago seguro</span>
+                <span>Garantia local</span>
+                <span>Envio nacional</span>
+            </div>
+        </div>
+        <div class="tech-card">
+            <h3 class="panel-title">Nucleo ViNEK TECH</h3>
+            <div class="metrics">
+                <div class="metric">
+                    <small>Entrega nacional</small>
+                    <strong>24/72h</strong>
+                </div>
+                <div class="metric">
+                    <small>Clientes tech</small>
+                    <strong>500+</strong>
+                </div>
+                <div class="metric">
+                    <small>Soporte</small>
+                    <strong>Lun-Sab</strong>
+                </div>
+            </div>
+            <p>Diseñamos soluciones para setups personales, laboratorios empresariales y entornos de investigación aplicada.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container split-feature">
+        <article class="tech-card">
+            <h3 class="panel-title">Arquitectura por Tiers</h3>
+            <p><strong>Inicial:</strong> setup inicial para estudiantes y makers.</p>
+            <p><strong>Intermedio:</strong> laboratorios que necesitan estabilidad y escalabilidad.</p>
+            <p><strong>Pro:</strong> equipos ofensivos/defensivos con exigencia operacional.</p>
+        </article>
+        <article class="tech-card">
+            <h3 class="panel-title">Newsletter</h3>
+            <p>Recibe drops de hardware, descuentos y guias tecnicas.</p>
+            <form method="post" action="{% url 'store:newsletter_signup' %}" class="inline-actions">
+                {% csrf_token %}
+                <input type="email" name="email" required placeholder="tu@email.com">
+                <button class="btn" type="submit">Unirme</button>
+            </form>
+        </article>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="section-head">
+            <h2>Destacados</h2>
+            <a class="btn btn-outline" href="{% url 'store:catalog' %}">Ver todo</a>
+        </div>
+        <div class="grid-products">
+            {% for product in featured_products %}
+                {% include 'components/product_card.html' %}
+            {% empty %}
+                <p>No hay productos destacados por ahora.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="section-head">
+            <h2>Tiers</h2>
+        </div>
+        <div class="grid-products">
+            {% for product in tiers.entry %}{% include 'components/product_card.html' %}{% endfor %}
+            {% for product in tiers.mid %}{% include 'components/product_card.html' %}{% endfor %}
+            {% for product in tiers.pro %}{% include 'components/product_card.html' %}{% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}Catalogo | ViNEK TECH{% endblock %}
+
+{% block content %}
+<section class="container filters-layout">
+    <aside class="filters">
+        <h2 class="panel-title">Filtros</h2>
+        <form method="get">
+            <div class="form-row">
+                <label>Buscar</label>
+                <input type="text" name="q" value="{{ query }}" placeholder="router, flipper, wifi...">
+            </div>
+            <div class="form-row">
+                <label>Categoria</label>
+                <select name="category">
+                    <option value="">Todas</option>
+                    {% for category in categories %}
+                        <option value="{{ category.slug }}" {% if selected_category == category.slug %}selected{% endif %}>{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-row">
+                <label>Tier</label>
+                <select name="tier">
+                    <option value="">Todos</option>
+                    <option value="entry" {% if selected_tier == 'entry' %}selected{% endif %}>Inicial</option>
+                    <option value="mid" {% if selected_tier == 'mid' %}selected{% endif %}>Intermedio</option>
+                    <option value="pro" {% if selected_tier == 'pro' %}selected{% endif %}>Pro</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label>Precio minimo</label>
+                <input type="number" name="min_price" value="{{ min_price }}">
+            </div>
+            <div class="form-row">
+                <label>Precio maximo</label>
+                <input type="number" name="max_price" value="{{ max_price }}">
+            </div>
+            <div class="form-row">
+                <label>Ordenar</label>
+                <select name="sort">
+                    <option value="newest" {% if sort == 'newest' %}selected{% endif %}>Mas nuevos</option>
+                    <option value="price_asc" {% if sort == 'price_asc' %}selected{% endif %}>Precio menor</option>
+                    <option value="price_desc" {% if sort == 'price_desc' %}selected{% endif %}>Precio mayor</option>
+                    <option value="name" {% if sort == 'name' %}selected{% endif %}>Nombre</option>
+                </select>
+            </div>
+            <button class="btn" type="submit">Aplicar</button>
+        </form>
+    </aside>
+
+    <div class="content-panel">
+        <div class="section-head">
+            <h2>Catalogo</h2>
+            <span>{{ products|length }} resultados</span>
+        </div>
+        <div class="grid-products">
+            {% for product in products %}
+                {% include 'components/product_card.html' %}
+            {% empty %}
+                <p>No encontramos productos con esos filtros.</p>
+            {% endfor %}
+        </div>
+        {% if page_obj.has_other_pages %}
+            <div class="pagination">
+                {% if page_obj.has_previous %}
+                    <a class="btn btn-outline" href="?{% if query %}q={{ query }}&{% endif %}{% if selected_category %}category={{ selected_category }}&{% endif %}{% if selected_tier %}tier={{ selected_tier }}&{% endif %}{% if min_price %}min_price={{ min_price }}&{% endif %}{% if max_price %}max_price={{ max_price }}&{% endif %}{% if sort %}sort={{ sort }}&{% endif %}page={{ page_obj.previous_page_number }}">Anterior</a>
+                {% endif %}
+                <span>Pagina {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+                {% if page_obj.has_next %}
+                    <a class="btn btn-outline" href="?{% if query %}q={{ query }}&{% endif %}{% if selected_category %}category={{ selected_category }}&{% endif %}{% if selected_tier %}tier={{ selected_tier }}&{% endif %}{% if min_price %}min_price={{ min_price }}&{% endif %}{% if max_price %}max_price={{ max_price }}&{% endif %}{% if sort %}sort={{ sort }}&{% endif %}page={{ page_obj.next_page_number }}">Siguiente</a>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

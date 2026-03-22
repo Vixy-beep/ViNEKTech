@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Login | ViNEK TECH{% endblock %}
+
+{% block content %}
+<section class="container section">
+    <div class="form-panel" style="max-width:580px;margin:0 auto;">
+        <h1 class="panel-title">Accede a tu cuenta</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn" type="submit">Entrar</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

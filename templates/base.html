@@ -1,0 +1,97 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{% block title %}ViNEK TECH{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}ViNEK TECH - Gadgets de ciberseguridad y tecnología en República Dominicana.{% endblock %}">
+    <meta property="og:title" content="{% block og_title %}ViNEK TECH{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Tienda de gadgets de ciberseguridad y tecnologia en Republica Dominicana.{% endblock %}">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+    <div class="grid-noise"></div>
+
+    <header class="site-header">
+        <div class="container nav-wrap">
+            <a class="brand" href="{% url 'store:home' %}">
+                <span class="brand-mark">V</span>
+                <span>
+                    <strong>ViNEK TECH</strong>
+                    <small>Tienda Tech Segura</small>
+                </span>
+            </a>
+            <nav class="main-nav">
+                <a href="{% url 'store:catalog' %}">Catalogo</a>
+                <a href="{% url 'orders:checkout' %}">Pago</a>
+                <a href="{% url 'orders:tracking' %}">Seguimiento</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'accounts:profile' %}">Perfil</a>
+                    <a href="{% url 'orders:my_orders' %}">Pedidos</a>
+                    <a href="{% url 'accounts:logout' %}">Salir</a>
+                {% else %}
+                    <a href="{% url 'accounts:login' %}">Entrar</a>
+                    <a href="{% url 'accounts:signup' %}">Crear cuenta</a>
+                {% endif %}
+            </nav>
+            <a class="cart-pill" href="{% url 'cart:detail' %}">
+                Carrito
+                <span>{{ cart_count }}</span>
+            </a>
+            <form action="{% url 'set_language' %}" method="post" class="lang-switch">
+                {% csrf_token %}
+                <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                <select name="language" onchange="this.form.submit()">
+                    <option value="es" {% if request.LANGUAGE_CODE|slice:':2' == 'es' %}selected{% endif %}>ES</option>
+                    <option value="en" {% if request.LANGUAGE_CODE|slice:':2' == 'en' %}selected{% endif %}>EN</option>
+                </select>
+            </form>
+        </div>
+    </header>
+
+    <main class="page">
+        <div class="container">
+            {% if messages %}
+                <ul class="flash-list">
+                    {% for message in messages %}
+                        <li class="flash {{ message.tags }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div>
+                <h4>ViNEK TECH</h4>
+                <p>Infraestructura, gadgets y herramientas para equipos de ciberseguridad y laboratorios técnicos.</p>
+            </div>
+            <div>
+                <h5>Legal</h5>
+                <a href="{% url 'store:terms' %}">Terminos</a>
+                <a href="{% url 'store:privacy' %}">Privacidad</a>
+                <a href="{% url 'store:responsible_use' %}">Uso responsable</a>
+            </div>
+            <div>
+                <h5>Contacto</h5>
+                <p>Santo Domingo, RD</p>
+                <p>sales@vinektech.com</p>
+                <p>VinekTech.com</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

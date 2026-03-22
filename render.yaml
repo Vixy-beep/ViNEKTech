@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: vinektech-demo
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
+    startCommand: gunicorn config.wsgi:application --workers 2 --threads 2 --timeout 120
+    envVars:
+      - key: DJANGO_DEBUG
+        value: "False"
+      - key: DJANGO_ALLOWED_HOSTS
+        value: "vinektech-demo.onrender.com"
+      - key: DJANGO_CSRF_TRUSTED_ORIGINS
+        value: "https://vinektech-demo.onrender.com"
+      - key: DJANGO_SECURE_SSL_REDIRECT
+        value: "True"
+      - key: USD_TO_DOP_RATE
+        value: "62"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: vinektech-demo-db
+          property: connectionString
+
+databases:
+  - name: vinektech-demo-db
+    plan: free

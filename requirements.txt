@@ -1,0 +1,10 @@
+Django==6.0.3
+djangorestframework
+pillow
+stripe
+python-dotenv
+psycopg[binary]
+gunicorn
+whitenoise
+dj-database-url
+deep-translator

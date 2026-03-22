@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Carrito | ViNEK TECH{% endblock %}
+
+{% block content %}
+<section class="container checkout-layout">
+    <article class="content-panel">
+        <h1 class="panel-title">Tu carrito</h1>
+        {% if items %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                        <tr>
+                            <td>{{ item.product.name }}</td>
+                            <td>
+                                <form method="post" action="{% url 'cart:update' item.product.id %}">
+                                    {% csrf_token %}
+                                    <input type="number" name="quantity" value="{{ item.quantity }}" min="0" max="{{ item.product.available_stock }}">
+                                    <button class="btn btn-outline" type="submit">Actualizar</button>
+                                </form>
+                            </td>
+                            <td>RD$ {{ item.line_total }}</td>
+                            <td><a class="btn btn-outline" href="{% url 'cart:remove' item.product.id %}">Quitar</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No tienes productos en el carrito.</p>
+        {% endif %}
+    </article>
+
+    <aside class="form-panel">
+        <h3 class="panel-title">Resumen</h3>
+        <p>Subtotal: RD$ {{ subtotal }}</p>
+        <p>Envio: RD$ {{ shipping }}</p>
+        <p><strong>Total: RD$ {{ total }}</strong></p>
+        <div class="inline-actions">
+            <a class="btn" href="{% url 'orders:checkout' %}">Pagar</a>
+            <a class="btn btn-outline" href="{% url 'cart:clear' %}">Vaciar</a>
+        </div>
+    </aside>
+</section>
+{% endblock %}

@@ -1,0 +1,20 @@
+<article class="product-card">
+    <span class="tier-badge">{{ product.get_tier_display }}</span>
+    {% if product.is_bestseller %}
+        <span class="tier-badge tier-hot">Mas vendido</span>
+    {% endif %}
+    <h3>{{ product.localized_name }}</h3>
+    <p>{{ product.localized_short_description|truncatechars:120 }}</p>
+    <div class="inline-actions">
+        <a class="btn btn-outline" href="{{ product.get_absolute_url }}">Ver</a>
+        {% if product.in_stock %}
+            <a class="btn" href="{% url 'cart:add' product.id %}">Agregar</a>
+        {% else %}
+            <span class="tag-out">Sin stock</span>
+        {% endif %}
+    </div>
+    <div class="price">RD$ {{ product.price_dop_value }}</div>
+    {% if product.compare_at_price %}
+        <small class="compare-price">Antes RD$ {{ product.compare_at_price }}</small>
+    {% endif %}
+</article>

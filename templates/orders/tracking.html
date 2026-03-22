@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Seguimiento | ViNEK TECH{% endblock %}
+
+{% block content %}
+<section class="container section">
+    <div class="checkout-layout">
+        <article class="form-panel">
+            <h1 class="panel-title">Seguimiento de pedido</h1>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-row">
+                    <label>Numero de orden</label>
+                    <input type="text" name="order_id" placeholder="Ej: 1024">
+                </div>
+                <div class="form-row">
+                    <label>Email de compra</label>
+                    <input type="email" name="email" placeholder="correo@dominio.com">
+                </div>
+                <button class="btn" type="submit">Consultar</button>
+            </form>
+            {% if error %}
+                <p class="tag-out">{{ error }}</p>
+            {% endif %}
+        </article>
+        <aside class="content-panel">
+            <h3 class="panel-title">Resultado</h3>
+            {% if order %}
+                <p><strong>Orden:</strong> #{{ order.id }}</p>
+                <p><strong>Estado:</strong> {{ order.get_status_display }}</p>
+                <p><strong>Total:</strong> RD$ {{ order.total }}</p>
+                <p><strong>Guia:</strong> {{ order.tracking_number|default:'Pendiente' }}</p>
+                {% if order.estimated_delivery %}
+                    <p><strong>Entrega estimada:</strong> {{ order.estimated_delivery|date:'d/m/Y' }}</p>
+                {% endif %}
+            {% else %}
+                <p>Introduce datos para buscar tu pedido.</p>
+            {% endif %}
+        </aside>
+    </div>
+</section>
+{% endblock %}

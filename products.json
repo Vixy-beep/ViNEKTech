@@ -1,0 +1,543 @@
+[
+  {"model": "store.category", "pk": 1, "fields": {"name": "USB Attack Tools", "slug": "usb-attack-tools", "parent": null}},
+  {"model": "store.category", "pk": 2, "fields": {"name": "WiFi Adapters", "slug": "wifi-adapters", "parent": null}},
+  {"model": "store.category", "pk": 3, "fields": {"name": "Defense & Privacy", "slug": "defense-privacy", "parent": null}},
+  {"model": "store.category", "pk": 4, "fields": {"name": "NFC & RFID", "slug": "nfc-rfid", "parent": null}},
+  {"model": "store.category", "pk": 5, "fields": {"name": "SDR & RF", "slug": "sdr-rf", "parent": null}},
+  {"model": "store.category", "pk": 6, "fields": {"name": "Microcontrollers & SBC", "slug": "microcontrollers-sbc", "parent": null}},
+  {"model": "store.category", "pk": 7, "fields": {"name": "Star Products", "slug": "star-products", "parent": null}},
+  {"model": "store.category", "pk": 8, "fields": {"name": "Network Audit", "slug": "network-audit", "parent": null}},
+  {"model": "store.category", "pk": 9, "fields": {"name": "Security Keys", "slug": "security-keys", "parent": null}},
+  {"model": "store.category", "pk": 10, "fields": {"name": "Hardware Debug", "slug": "hardware-debug", "parent": null}},
+  {"model": "store.category", "pk": 11, "fields": {"name": "Pro Bundles", "slug": "pro-bundles", "parent": null}},
+  {"model": "store.category", "pk": 12, "fields": {"name": "Network Defense", "slug": "network-defense", "parent": null}},
+  {"model": "store.category", "pk": 13, "fields": {"name": "AI & Edge Computing", "slug": "ai-edge-computing", "parent": null}},
+  {"model": "store.category", "pk": 14, "fields": {"name": "IoT & Industrial", "slug": "iot-industrial", "parent": null}},
+
+  {"model": "store.product", "pk": 1, "fields": {
+    "name": "USB Rubber Ducky", "slug": "usb-rubber-ducky",
+    "description": "Classic HID injection tool. Executes keystroke payloads on any USB-enabled computer in seconds. Essential for physical penetration testing and security awareness demos.",
+    "price": "89.00", "stock": 10, "category": 1, "tier": "entry",
+    "requires_declaration": true, "phase": 1, "active": true
+  }},
+  {"model": "store.product", "pk": 2, "fields": {
+    "name": "Bash Bunny", "slug": "bash-bunny",
+    "description": "Multi-function USB attack tool by Hak5. Supports HID injection, mass storage emulation, and network attacks. Runs payloads written in simple Bash scripts.",
+    "price": "119.00", "stock": 8, "category": 1, "tier": "entry",
+    "requires_declaration": true, "phase": 1, "active": true
+  }},
+  {"model": "store.product", "pk": 3, "fields": {
+    "name": "Malduino", "slug": "malduino",
+    "description": "Open-source BadUSB device based on Arduino. Programmable HID injector, ideal for learning keystroke injection in controlled lab environments.",
+    "price": "35.00", "stock": 15, "category": 1, "tier": "entry",
+    "requires_declaration": true, "phase": 1, "active": true
+  }},
+  {"model": "store.product", "pk": 4, "fields": {
+    "name": "Digispark USB", "slug": "digispark-usb",
+    "description": "Tiny ATtiny85-based microcontroller board with USB. Can be programmed as a BadUSB device or general-purpose microcontroller for DIY projects.",
+    "price": "12.00", "stock": 30, "category": 1, "tier": "entry",
+    "requires_declaration": false, "phase": 1, "active": true
+  }},
+  {"model": "store.product", "pk": 5, "fields": {
+    "name": "Keystroke Injector USB", "slug": "keystroke-injector-usb",
+    "description": "Standalone USB HID injector for executing pre-programmed keystroke sequences. Used for automated red team physical assessments.",
+    "price": "28.00", "stock": 20, "category": 1, "tier": "entry",
+    "requires_declaration": true, "phase": 1, "active": true
+  }},
+
+  {"model": "store.product", "pk": 6, "fields": {
+    "name": "Alfa AWUS036ACH", "slug": "alfa-awus036ach",
+    "description": "Dual-band AC1200 USB WiFi adapter with monitor mode and packet injection support. Compatible with Kali Linux out of the box. Industry standard for WiFi auditing.",
+    "price": "45.00", "stock": 20, "category": 2, "tier": "entry",
+    "requires_declaration": false, "phase": 1, "active": true
+  }},
+  {"model": "store.product", "pk": 7, "fields": {
+    "name": "Alfa AWUS036NHA", "slug": "alfa-awus036nha",
+    "description": "High-gain 802.11b/g/n USB adapter with Atheros AR9271 chipset. Excellent monitor mode support, widely used for WPA/WPA2 auditing.",
+    "price": "38.00", "stock": 20, "category": 2, "tier": "entry",
+    "requires_declaration": false, "phase": 1, "active": true
+  }},
+  {"model": "store.product", "pk": 8, "fields": {
+    "name": "TP-Link TL-WN722N v1", "slug": "tp-link-wn722n",
+    "description": "Budget-friendly 150Mbps USB adapter with Atheros AR9271 chipset supporting monitor mode. Best entry-level option for WiFi security learning.",
+    "price": "18.00", "stock": 35, "category": 2, "tier": "entry",
+    "requires_declaration": false, "phase": 1, "active": true
+  }},
+
+  {"model": "store.product", "pk": 9, "fields": {
+    "name": "USB Data Blocker", "slug": "usb-data-blocker",
+    "description": "Blocks data pins on USB connections, allowing only charging. Protects against juice jacking attacks in public charging stations.",
+    "price": "12.00", "stock": 50, "category": 3, "tier": "entry",
+    "requires_declaration": false, "phase": 1, "active": true
+  }},
+  {"model": "store.product", "pk": 10, "fields": {
+    "name": "Faraday Bag", "slug": "faraday-bag",
+    "description": "Signal-blocking pouch that isolates phones, key fobs, and cards from RFID/NFC/cellular/WiFi/GPS signals. Essential for investigators and privacy-conscious users.",
+    "price": "22.00", "stock": 40, "category": 3, "tier": "entry",
+    "requires_declaration": false, "phase": 1, "active": true
+  }},
+  {"model": "store.product", "pk": 11, "fields": {
+    "name": "Faraday Box", "slug": "faraday-box",
+    "description": "Rigid metal Faraday enclosure for laptops, tablets, and multiple devices. Blocks all wireless signals for secure evidence storage or covert device examination.",
+    "price": "65.00", "stock": 15, "category": 3, "tier": "entry",
+    "requires_declaration": false, "phase": 1, "active": true
+  }},
+  {"model": "store.product", "pk": 12, "fields": {
+    "name": "Encrypted USB Drive", "slug": "encrypted-usb-drive",
+    "description": "Hardware-encrypted USB flash drive with AES-256 protection. PIN-based access, auto-wipe after failed attempts. No software required.",
+    "price": "55.00", "stock": 25, "category": 3, "tier": "entry",
+    "requires_declaration": false, "phase": 1, "active": true
+  }},
+  {"model": "store.product", "pk": 13, "fields": {
+    "name": "Hardware Password Manager", "slug": "hardware-password-manager",
+    "description": "Offline hardware password manager. Stores and types credentials via USB HID without exposing them to the host OS or internet.",
+    "price": "49.00", "stock": 20, "category": 3, "tier": "entry",
+    "requires_declaration": false, "phase": 1, "active": true
+  }},
+  {"model": "store.product", "pk": 14, "fields": {
+    "name": "Laptop Privacy Screen", "slug": "laptop-privacy-screen",
+    "description": "Anti-spy screen filter that limits viewing angles to 60 degrees. Prevents visual eavesdropping in public spaces. Available in 13\", 14\", 15.6\" sizes.",
+    "price": "28.00", "stock": 30, "category": 3, "tier": "entry",
+    "requires_declaration": false, "phase": 1, "active": true
+  }},
+  {"model": "store.product", "pk": 15, "fields": {
+    "name": "Webcam Cover Slider", "slug": "webcam-cover-slider",
+    "description": "Thin adhesive webcam cover with sliding shutter. Physically blocks laptop/monitor webcam. Pack of 3.",
+    "price": "8.00", "stock": 100, "category": 3, "tier": "entry",
+    "requires_declaration": false, "phase": 1, "active": true
+  }},
+  {"model": "store.product", "pk": 16, "fields": {
+    "name": "RF Signal Detector", "slug": "rf-signal-detector",
+    "description": "Handheld detector for hidden RF transmitters, wireless cameras, and GPS trackers. Detects 1MHz–8GHz range. Counter-surveillance essential.",
+    "price": "45.00", "stock": 20, "category": 3, "tier": "entry",
+    "requires_declaration": false, "phase": 1, "active": true
+  }},
+  {"model": "store.product", "pk": 17, "fields": {
+    "name": "Hidden Camera Detector", "slug": "hidden-camera-detector",
+    "description": "Dual-mode detector using RF scanning and optical lens detection to find covert cameras in hotel rooms, Airbnbs, and offices.",
+    "price": "38.00", "stock": 25, "category": 3, "tier": "entry",
+    "requires_declaration": false, "phase": 1, "active": true
+  }},
+  {"model": "store.product", "pk": 18, "fields": {
+    "name": "Anti Spy Detector", "slug": "anti-spy-detector",
+    "description": "Comprehensive counter-surveillance device detecting RF bugs, GSM trackers, and hidden cameras. LCD signal strength display.",
+    "price": "55.00", "stock": 15, "category": 3, "tier": "entry",
+    "requires_declaration": false, "phase": 1, "active": true
+  }},
+  {"model": "store.product", "pk": 19, "fields": {
+    "name": "Secure Charging Cable", "slug": "secure-charging-cable",
+    "description": "USB charge-only cable with data lines physically removed. Safe for public charging. Available in USB-A to Lightning, USB-C, and Micro-USB.",
+    "price": "14.00", "stock": 60, "category": 3, "tier": "entry",
+    "requires_declaration": false, "phase": 1, "active": true
+  }},
+  {"model": "store.product", "pk": 20, "fields": {
+    "name": "USB Power Monitor", "slug": "usb-power-monitor",
+    "description": "Inline USB meter displaying voltage, current, power, and capacity. Detects anomalies in USB charging that may indicate malicious hardware.",
+    "price": "18.00", "stock": 40, "category": 3, "tier": "entry",
+    "requires_declaration": false, "phase": 1, "active": true
+  }},
+  {"model": "store.product", "pk": 21, "fields": {
+    "name": "Portable Secure Power Bank", "slug": "portable-secure-power-bank",
+    "description": "20,000mAh power bank with hardware data-blocking on all USB-A ports. Charges only, never syncs. Ideal for field operations.",
+    "price": "42.00", "stock": 20, "category": 3, "tier": "entry",
+    "requires_declaration": false, "phase": 1, "active": true
+  }},
+
+  {"model": "store.product", "pk": 22, "fields": {
+    "name": "ACR122U NFC Reader", "slug": "acr122u-nfc-reader",
+    "description": "USB NFC reader/writer supporting ISO 14443 A/B and FeliCa. Compatible with libnfc and popular NFC tools. Standard for NFC research and card analysis.",
+    "price": "32.00", "stock": 20, "category": 4, "tier": "entry",
+    "requires_declaration": false, "phase": 1, "active": true
+  }},
+  {"model": "store.product", "pk": 23, "fields": {
+    "name": "RFID Cloner Kit", "slug": "rfid-cloner-kit",
+    "description": "125kHz RFID read/write kit for EM4100 and HID cards. Includes handheld reader, blank cards, and key fobs. Used for access control security assessments.",
+    "price": "28.00", "stock": 25, "category": 4, "tier": "entry",
+    "requires_declaration": true, "phase": 1, "active": true
+  }},
+
+  {"model": "store.product", "pk": 24, "fields": {
+    "name": "RTL-SDR Dongle", "slug": "rtl-sdr-dongle",
+    "description": "Wideband software-defined radio receiver (500kHz–1.75GHz). Receive-only. Perfect for learning radio protocols, ADS-B aircraft tracking, and spectrum analysis.",
+    "price": "35.00", "stock": 25, "category": 5, "tier": "entry",
+    "requires_declaration": false, "phase": 1, "active": true
+  }},
+  {"model": "store.product", "pk": 25, "fields": {
+    "name": "LoRa Dev Board", "slug": "lora-dev-board",
+    "description": "Long-range low-power IoT development board with LoRa transceiver. Ideal for building LoRaWAN sensors, tracking devices, and learning LPWAN protocols.",
+    "price": "22.00", "stock": 30, "category": 5, "tier": "entry",
+    "requires_declaration": false, "phase": 1, "active": true
+  }},
+
+  {"model": "store.product", "pk": 26, "fields": {
+    "name": "ESP8266 NodeMCU", "slug": "esp8266-nodemcu",
+    "description": "Low-cost WiFi microcontroller with full TCP/IP stack. Programmable via Arduino IDE. Used for IoT projects, WiFi deauthers, and network tools.",
+    "price": "8.00", "stock": 60, "category": 6, "tier": "entry",
+    "requires_declaration": false, "phase": 1, "active": true
+  }},
+  {"model": "store.product", "pk": 27, "fields": {
+    "name": "ESP32 Dev Kit", "slug": "esp32-dev-kit",
+    "description": "Dual-core WiFi + Bluetooth microcontroller. More powerful than ESP8266. Supports BLE sniffing, WiFi scanning, and custom sensor projects.",
+    "price": "12.00", "stock": 50, "category": 6, "tier": "entry",
+    "requires_declaration": false, "phase": 1, "active": true
+  }},
+
+  {"model": "store.product", "pk": 28, "fields": {
+    "name": "Flipper Zero", "slug": "flipper-zero",
+    "description": "The ultimate portable multi-tool for security researchers. Reads/emulates RFID, NFC, IR, Sub-GHz signals, iButton, and has BadUSB capabilities. Huge community and plugin ecosystem.",
+    "price": "199.00", "stock": 5, "category": 7, "tier": "mid",
+    "requires_declaration": true, "phase": 2, "active": true
+  }},
+  {"model": "store.product", "pk": 29, "fields": {
+    "name": "Pwnagotchi Kit", "slug": "pwnagotchi-kit",
+    "description": "Custom-assembled Pwnagotchi unit based on Raspberry Pi Zero W. AI-driven WPA handshake capture tool with e-ink display. Assembled and pre-configured locally by VinekTech.",
+    "price": "95.00", "stock": 8, "category": 7, "tier": "mid",
+    "requires_declaration": true, "phase": 2, "active": true
+  }},
+
+  {"model": "store.product", "pk": 30, "fields": {
+    "name": "Raspberry Pi 4 (4GB)", "slug": "raspberry-pi-4-4gb",
+    "description": "Quad-core 64-bit SBC with 4GB RAM. The go-to platform for custom pentest tools, Pi-hole, network monitoring, and portable hacking setups.",
+    "price": "75.00", "stock": 10, "category": 6, "tier": "mid",
+    "requires_declaration": false, "phase": 2, "active": true
+  }},
+  {"model": "store.product", "pk": 31, "fields": {
+    "name": "Raspberry Pi 5 (8GB)", "slug": "raspberry-pi-5-8gb",
+    "description": "Latest generation SBC with PCIe support, significantly faster than Pi 4. Ideal for heavy pentesting workloads and AI-assisted security tools.",
+    "price": "95.00", "stock": 8, "category": 6, "tier": "mid",
+    "requires_declaration": false, "phase": 2, "active": true
+  }},
+  {"model": "store.product", "pk": 32, "fields": {
+    "name": "Raspberry Pi Zero W", "slug": "raspberry-pi-zero-w",
+    "description": "Ultra-compact WiFi-enabled SBC. Used in Pwnagotchi builds, covert pentest implants, and portable network tools.",
+    "price": "18.00", "stock": 20, "category": 6, "tier": "entry",
+    "requires_declaration": false, "phase": 2, "active": true
+  }},
+  {"model": "store.product", "pk": 33, "fields": {
+    "name": "BeagleBone Black", "slug": "beaglebone-black",
+    "description": "ARM Cortex-A8 SBC with PRU real-time coprocessors. Excellent for industrial IoT security testing and hardware interfacing projects.",
+    "price": "55.00", "stock": 10, "category": 6, "tier": "mid",
+    "requires_declaration": false, "phase": 2, "active": true
+  }},
+  {"model": "store.product", "pk": 34, "fields": {
+    "name": "Intel NUC Mini PC", "slug": "intel-nuc-mini-pc",
+    "description": "Compact x86 mini PC running full Linux distributions. Perfect for portable Kali Linux or Parrot OS pentesting setups and on-site lab deployments.",
+    "price": "280.00", "stock": 5, "category": 6, "tier": "mid",
+    "requires_declaration": false, "phase": 2, "active": true
+  }},
+
+  {"model": "store.product", "pk": 35, "fields": {
+    "name": "Proxmark3 RDV4", "slug": "proxmark3-rdv4",
+    "description": "Professional RFID research platform supporting LF and HF cards (125kHz–13.56MHz). Emulate, clone, sniff, and brute-force access control cards. The gold standard for RFID security research.",
+    "price": "320.00", "stock": 4, "category": 4, "tier": "mid",
+    "requires_declaration": true, "phase": 2, "active": true
+  }},
+  {"model": "store.product", "pk": 36, "fields": {
+    "name": "Chameleon Ultra", "slug": "chameleon-ultra",
+    "description": "Next-gen RFID/NFC emulator supporting a wide range of card types including MIFARE, iCLASS, and EM4100. Bluetooth-enabled with mobile app support.",
+    "price": "180.00", "stock": 6, "category": 4, "tier": "mid",
+    "requires_declaration": true, "phase": 2, "active": true
+  }},
+
+  {"model": "store.product", "pk": 37, "fields": {
+    "name": "HackRF One", "slug": "hackrf-one",
+    "description": "Open-source SDR peripheral covering 1MHz–6GHz with TX and RX capability. Transmit and receive any radio signal. Essential for RF security research.",
+    "price": "340.00", "stock": 4, "category": 5, "tier": "mid",
+    "requires_declaration": true, "phase": 2, "active": true
+  }},
+  {"model": "store.product", "pk": 38, "fields": {
+    "name": "Ubertooth One", "slug": "ubertooth-one",
+    "description": "Open-source Bluetooth sniffing platform. Captures Bluetooth Classic and BLE traffic for protocol analysis and security research.",
+    "price": "120.00", "stock": 6, "category": 5, "tier": "mid",
+    "requires_declaration": true, "phase": 2, "active": true
+  }},
+  {"model": "store.product", "pk": 39, "fields": {
+    "name": "Yard Stick One", "slug": "yard-stick-one",
+    "description": "Sub-GHz RF transceiver (300–348MHz, 391–464MHz, 782–928MHz). Transmit and receive on ISM bands. Used for garage door, car key fob, and IoT RF research.",
+    "price": "99.00", "stock": 8, "category": 5, "tier": "mid",
+    "requires_declaration": true, "phase": 2, "active": true
+  }},
+  {"model": "store.product", "pk": 40, "fields": {
+    "name": "Bluetooth Sniffer", "slug": "bluetooth-sniffer",
+    "description": "Passive BLE packet sniffer for protocol analysis. Captures advertising packets and connection data for IoT device security assessments.",
+    "price": "55.00", "stock": 12, "category": 5, "tier": "mid",
+    "requires_declaration": true, "phase": 2, "active": true
+  }},
+  {"model": "store.product", "pk": 41, "fields": {
+    "name": "Zigbee Sniffer", "slug": "zigbee-sniffer",
+    "description": "USB Zigbee packet capture device for smart home and IoT protocol analysis. Compatible with Wireshark via the whsniff plugin.",
+    "price": "48.00", "stock": 10, "category": 5, "tier": "mid",
+    "requires_declaration": true, "phase": 2, "active": true
+  }},
+  {"model": "store.product", "pk": 42, "fields": {
+    "name": "Drone Signal Analyzer", "slug": "drone-signal-analyzer",
+    "description": "Passive RF analyzer for detecting and identifying drone control signals. Supports 2.4GHz and 5.8GHz bands. For authorized spectrum monitoring.",
+    "price": "145.00", "stock": 5, "category": 5, "tier": "mid",
+    "requires_declaration": true, "phase": 2, "active": true
+  }},
+
+  {"model": "store.product", "pk": 43, "fields": {
+    "name": "WiFi Pineapple", "slug": "wifi-pineapple",
+    "description": "Professional WiFi auditing platform by Hak5. Performs rogue AP, MITM, and reconnaissance attacks in authorized network assessments. Used by red teams worldwide.",
+    "price": "249.00", "stock": 5, "category": 8, "tier": "mid",
+    "requires_declaration": true, "phase": 2, "active": true
+  }},
+  {"model": "store.product", "pk": 44, "fields": {
+    "name": "LAN Turtle", "slug": "lan-turtle",
+    "description": "Covert network implant in a USB Ethernet adapter form factor. Provides persistent remote access and network reconnaissance capabilities for authorized red team ops.",
+    "price": "79.00", "stock": 8, "category": 8, "tier": "mid",
+    "requires_declaration": true, "phase": 2, "active": true
+  }},
+  {"model": "store.product", "pk": 45, "fields": {
+    "name": "Packet Squirrel", "slug": "packet-squirrel",
+    "description": "Inline Ethernet hardware tap with OpenWRT. Enables passive packet capture, DNS spoofing, and VPN tunneling for authorized network audits.",
+    "price": "79.00", "stock": 8, "category": 8, "tier": "mid",
+    "requires_declaration": true, "phase": 2, "active": true
+  }},
+  {"model": "store.product", "pk": 46, "fields": {
+    "name": "Shark Jack", "slug": "shark-jack",
+    "description": "Portable network attack and reconnaissance tool. Executes payloads on any Ethernet port and exfiltrates network intel. For authorized on-site assessments.",
+    "price": "79.00", "stock": 8, "category": 8, "tier": "mid",
+    "requires_declaration": true, "phase": 2, "active": true
+  }},
+  {"model": "store.product", "pk": 47, "fields": {
+    "name": "Plunder Bug", "slug": "plunder-bug",
+    "description": "Passive inline Ethernet tap for packet capture. Connects between any network device and switch. No power required. For authorized network monitoring.",
+    "price": "39.00", "stock": 12, "category": 8, "tier": "entry",
+    "requires_declaration": false, "phase": 2, "active": true
+  }},
+  {"model": "store.product", "pk": 48, "fields": {
+    "name": "Network Tap Hardware", "slug": "network-tap-hardware",
+    "description": "Passive copper network tap for full-duplex 10/100/1000 Ethernet monitoring. No configuration required. Feeds packet capture tools silently.",
+    "price": "65.00", "stock": 10, "category": 8, "tier": "entry",
+    "requires_declaration": false, "phase": 2, "active": true
+  }},
+  {"model": "store.product", "pk": 49, "fields": {
+    "name": "Network Packet Analyzer Device", "slug": "network-packet-analyzer-device",
+    "description": "Dedicated hardware network analyzer with built-in storage. Captures and replays full packet data on 1Gbps links. For authorized network forensics.",
+    "price": "195.00", "stock": 5, "category": 8, "tier": "mid",
+    "requires_declaration": true, "phase": 2, "active": true
+  }},
+
+  {"model": "store.product", "pk": 50, "fields": {
+    "name": "YubiKey 5 NFC", "slug": "yubikey-5-nfc",
+    "description": "Hardware security key supporting FIDO2, WebAuthn, TOTP, PGP, and PIV. NFC-enabled for mobile use. The industry standard for phishing-resistant MFA.",
+    "price": "55.00", "stock": 25, "category": 9, "tier": "entry",
+    "requires_declaration": false, "phase": 2, "active": true
+  }},
+  {"model": "store.product", "pk": 51, "fields": {
+    "name": "SoloKey Security Key", "slug": "solokey-security-key",
+    "description": "Open-source FIDO2/U2F hardware security key. Auditable firmware, USB-A and USB-C variants. Affordable alternative to YubiKey for FIDO2 authentication.",
+    "price": "29.00", "stock": 20, "category": 9, "tier": "entry",
+    "requires_declaration": false, "phase": 2, "active": true
+  }},
+  {"model": "store.product", "pk": 52, "fields": {
+    "name": "Nitrokey Pro 2", "slug": "nitrokey-pro-2",
+    "description": "Open-source hardware security key with on-device OpenPGP, S/MIME, and one-time password support. For email encryption and secure authentication.",
+    "price": "65.00", "stock": 15, "category": 9, "tier": "mid",
+    "requires_declaration": false, "phase": 2, "active": true
+  }},
+  {"model": "store.product", "pk": 53, "fields": {
+    "name": "Nitrokey Storage 2", "slug": "nitrokey-storage-2",
+    "description": "Encrypted USB drive with integrated OpenPGP smartcard. 64GB AES-256 encrypted storage plus hardware-backed key management.",
+    "price": "110.00", "stock": 10, "category": 9, "tier": "mid",
+    "requires_declaration": false, "phase": 2, "active": true
+  }},
+
+  {"model": "store.product", "pk": 54, "fields": {
+    "name": "Kit: Bug Bounty Starter", "slug": "kit-bug-bounty-starter",
+    "description": "Curated starter kit for bug bounty hunters: WiFi adapter (Alfa AWUS036ACH) + RTL-SDR + Proxmark3 + USB Rubber Ducky + encrypted USB drive. Discounted bundle.",
+    "price": "449.00", "stock": 5, "category": 11, "tier": "pro",
+    "requires_declaration": true, "phase": 3, "active": true
+  }},
+  {"model": "store.product", "pk": 55, "fields": {
+    "name": "Kit: Red Team Physical", "slug": "kit-red-team-physical",
+    "description": "Complete physical red team kit: Flipper Zero + Bash Bunny + LAN Turtle + Proxmark3 RDV4 + Lock Pick Set + Faraday bag. For authorized physical penetration testing.",
+    "price": "749.00", "stock": 3, "category": 11, "tier": "pro",
+    "requires_declaration": true, "phase": 3, "active": true
+  }},
+  {"model": "store.product", "pk": 56, "fields": {
+    "name": "Kit: Full SDR Lab", "slug": "kit-full-sdr-lab",
+    "description": "Complete RF research kit: HackRF One + Ubertooth One + Yard Stick One + RTL-SDR + Drone Signal Analyzer. Full spectrum coverage from Sub-GHz to 6GHz.",
+    "price": "649.00", "stock": 3, "category": 11, "tier": "pro",
+    "requires_declaration": true, "phase": 3, "active": true
+  }},
+  {"model": "store.product", "pk": 57, "fields": {
+    "name": "Kit: IoT Security Testing", "slug": "kit-iot-security-testing",
+    "description": "IoT pentest kit: ESP32 + ESP8266 + Zigbee Sniffer + Bluetooth Sniffer + RTL-SDR + LoRa board + Smart Home pentest guide. For authorized IoT device assessments.",
+    "price": "320.00", "stock": 4, "category": 11, "tier": "pro",
+    "requires_declaration": true, "phase": 3, "active": true
+  }},
+
+  {"model": "store.product", "pk": 58, "fields": {
+    "name": "GL.iNet Travel Router", "slug": "glinet-travel-router",
+    "description": "Pocket-sized OpenWRT router with VPN client support (WireGuard/OpenVPN). Used for secure travel networking, rogue AP detection, and on-site network pivoting.",
+    "price": "49.00", "stock": 15, "category": 12, "tier": "mid",
+    "requires_declaration": false, "phase": 3, "active": true
+  }},
+  {"model": "store.product", "pk": 59, "fields": {
+    "name": "OpenWRT Router", "slug": "openwrt-router",
+    "description": "Pre-flashed OpenWRT router for advanced network security labs. Supports VLANs, IDS/IPS plugins, and traffic analysis. Ideal for home lab and corporate training.",
+    "price": "85.00", "stock": 8, "category": 12, "tier": "mid",
+    "requires_declaration": false, "phase": 3, "active": true
+  }},
+  {"model": "store.product", "pk": 60, "fields": {
+    "name": "Hardware Firewall Appliance", "slug": "hardware-firewall-appliance",
+    "description": "Dedicated x86 hardware firewall appliance running pfSense or OPNsense. Multi-port Gigabit, VPN gateway, IDS/IPS capable. For SMB and enterprise deployments.",
+    "price": "220.00", "stock": 5, "category": 12, "tier": "pro",
+    "requires_declaration": false, "phase": 3, "active": true
+  }},
+  {"model": "store.product", "pk": 61, "fields": {
+    "name": "Portable VPN Router", "slug": "portable-vpn-router",
+    "description": "Battery-powered travel router with built-in WireGuard VPN support. Creates a secure encrypted WiFi hotspot from any wired or wireless connection.",
+    "price": "65.00", "stock": 10, "category": 12, "tier": "mid",
+    "requires_declaration": false, "phase": 3, "active": true
+  }},
+  {"model": "store.product", "pk": 62, "fields": {
+    "name": "Secure KVM Switch", "slug": "secure-kvm-switch",
+    "description": "Hardware-enforced KVM switch with optical data diodes between ports. Prevents cross-contamination between high and low security systems.",
+    "price": "180.00", "stock": 6, "category": 12, "tier": "pro",
+    "requires_declaration": false, "phase": 3, "active": true
+  }},
+
+  {"model": "store.product", "pk": 63, "fields": {
+    "name": "Logic Analyzer USB", "slug": "logic-analyzer-usb",
+    "description": "8/16-channel USB logic analyzer compatible with Sigrok/PulseView. Decodes SPI, I2C, UART, 1-Wire, and more. Essential for firmware and hardware security research.",
+    "price": "35.00", "stock": 15, "category": 10, "tier": "mid",
+    "requires_declaration": false, "phase": 3, "active": true
+  }},
+  {"model": "store.product", "pk": 64, "fields": {
+    "name": "JTAG Debugger", "slug": "jtag-debugger",
+    "description": "USB JTAG/SWD debugger for embedded systems. Supports ARM Cortex, MIPS, and RISC-V targets. Used for firmware extraction and hardware security analysis.",
+    "price": "45.00", "stock": 12, "category": 10, "tier": "mid",
+    "requires_declaration": false, "phase": 3, "active": true
+  }},
+  {"model": "store.product", "pk": 65, "fields": {
+    "name": "EEPROM Programmer", "slug": "eeprom-programmer",
+    "description": "Universal EEPROM/Flash programmer supporting thousands of chips. Read, write, and erase firmware from routers, IoT devices, and embedded systems.",
+    "price": "28.00", "stock": 15, "category": 10, "tier": "mid",
+    "requires_declaration": false, "phase": 3, "active": true
+  }},
+  {"model": "store.product", "pk": 66, "fields": {
+    "name": "BIOS Flash Programmer CH341A", "slug": "bios-flash-programmer-ch341a",
+    "description": "CH341A-based 24/25 series EEPROM and SPI flash programmer. Read and write BIOS chips, extract firmware from embedded devices.",
+    "price": "12.00", "stock": 25, "category": 10, "tier": "entry",
+    "requires_declaration": false, "phase": 3, "active": true
+  }},
+  {"model": "store.product", "pk": 67, "fields": {
+    "name": "USB Protocol Analyzer", "slug": "usb-protocol-analyzer",
+    "description": "Hardware USB 2.0 protocol analyzer capturing full-speed and low-speed transactions. Essential for reverse engineering USB devices and HID malware analysis.",
+    "price": "95.00", "stock": 8, "category": 10, "tier": "mid",
+    "requires_declaration": false, "phase": 3, "active": true
+  }},
+
+  {"model": "store.product", "pk": 68, "fields": {
+    "name": "NVIDIA Jetson Nano", "slug": "nvidia-jetson-nano",
+    "description": "AI edge computing module with 128-core Maxwell GPU and 4GB RAM. Run AI-powered security tools, computer vision, and neural network inference at the edge.",
+    "price": "149.00", "stock": 6, "category": 13, "tier": "pro",
+    "requires_declaration": false, "phase": 3, "active": true
+  }},
+  {"model": "store.product", "pk": 69, "fields": {
+    "name": "USB Armory Mk II", "slug": "usb-armory-mk-ii",
+    "description": "Open-source USB computer for security applications. ARM Cortex-A7, 512MB RAM, USB-C. Used as a hardware security module, password manager, or covert security implant in authorized audits.",
+    "price": "165.00", "stock": 5, "category": 13, "tier": "pro",
+    "requires_declaration": true, "phase": 3, "active": true
+  }},
+
+  {"model": "store.product", "pk": 70, "fields": {
+    "name": "SCADA Test Device", "slug": "scada-test-device",
+    "description": "Portable device for testing industrial control system protocols (Modbus, DNP3, IEC 61850). For authorized ICS/SCADA security assessments.",
+    "price": "380.00", "stock": 3, "category": 14, "tier": "pro",
+    "requires_declaration": true, "phase": 3, "active": true
+  }},
+  {"model": "store.product", "pk": 71, "fields": {
+    "name": "IoT Security Testing Kit", "slug": "iot-security-testing-kit",
+    "description": "Comprehensive kit for IoT device security assessments: firmware extraction tools, radio sniffers, and protocol analyzers in a portable case.",
+    "price": "420.00", "stock": 3, "category": 14, "tier": "pro",
+    "requires_declaration": true, "phase": 3, "active": true
+  }},
+  {"model": "store.product", "pk": 72, "fields": {
+    "name": "Smart Home Pentest Kit", "slug": "smart-home-pentest-kit",
+    "description": "Targeted kit for smart home device auditing: Zigbee sniffer + Bluetooth sniffer + ESP32 + IR blaster + universal remote. For authorized smart home security assessments.",
+    "price": "195.00", "stock": 5, "category": 14, "tier": "pro",
+    "requires_declaration": true, "phase": 3, "active": true
+  }},
+  {"model": "store.product", "pk": 73, "fields": {
+    "name": "Thermal Camera Module", "slug": "thermal-camera-module",
+    "description": "USB thermal imaging module for hardware security research. Detect heat signatures from active components, find hidden electronics, and analyze PCB activity.",
+    "price": "85.00", "stock": 8, "category": 14, "tier": "mid",
+    "requires_declaration": false, "phase": 3, "active": true
+  }},
+  {"model": "store.product", "pk": 74, "fields": {
+    "name": "IR Blaster + Receiver Kit", "slug": "ir-blaster-receiver-kit",
+    "description": "IR transmitter and receiver combo for capturing and replaying infrared remote control signals. Used in smart home security testing and IoT device research.",
+    "price": "18.00", "stock": 30, "category": 14, "tier": "entry",
+    "requires_declaration": false, "phase": 3, "active": true
+  }},
+  {"model": "store.product", "pk": 75, "fields": {
+    "name": "Universal Remote Hacking Device", "slug": "universal-remote-hacking-device",
+    "description": "Capture, analyze, and replay IR and RF remote control signals. Supports 300+ protocols. For authorized smart device security testing.",
+    "price": "55.00", "stock": 12, "category": 14, "tier": "mid",
+    "requires_declaration": true, "phase": 3, "active": true
+  }},
+  {"model": "store.product", "pk": 76, "fields": {
+    "name": "SIM Card Reader/Writer", "slug": "sim-card-reader-writer",
+    "description": "USB SIM card reader and writer for telecom security research. Read IMSI, ADN phonebook, and SMS data from standard SIM cards in authorized assessments.",
+    "price": "35.00", "stock": 10, "category": 14, "tier": "mid",
+    "requires_declaration": true, "phase": 3, "active": true
+  }},
+  {"model": "store.product", "pk": 77, "fields": {
+    "name": "Lock Pick Set (professional)", "slug": "lock-pick-set",
+    "description": "Professional stainless steel lock pick set with 24 picks, 5 tension wrenches, and carrying case. For certified locksmiths and authorized physical security assessors.",
+    "price": "48.00", "stock": 15, "category": 11, "tier": "mid",
+    "requires_declaration": true, "phase": 3, "active": true
+  }},
+  {"model": "store.product", "pk": 78, "fields": {
+    "name": "Digital Door Lock Tester", "slug": "digital-door-lock-tester",
+    "description": "Electronic tool for testing digital door lock vulnerabilities including replay attacks, voltage glitching, and firmware extraction. For authorized physical pentest engagements.",
+    "price": "120.00", "stock": 5, "category": 11, "tier": "pro",
+    "requires_declaration": true, "phase": 3, "active": true
+  }},
+  {"model": "store.product", "pk": 79, "fields": {
+    "name": "Key Decoder Tool", "slug": "key-decoder-tool",
+    "description": "Optical key decoder that photographs and decodes key bitting from a distance. Used by authorized locksmiths and physical security auditors.",
+    "price": "65.00", "stock": 6, "category": 11, "tier": "mid",
+    "requires_declaration": true, "phase": 3, "active": true
+  }},
+  {"model": "store.product", "pk": 80, "fields": {
+    "name": "Multiport USB Data Switch", "slug": "multiport-usb-data-switch",
+    "description": "Manual USB 3.0 switch allowing one computer to securely share peripherals with multiple machines, or to isolate USB devices during malware analysis.",
+    "price": "32.00", "stock": 20, "category": 3, "tier": "entry",
+    "requires_declaration": false, "phase": 3, "active": true
+  }},
+  {"model": "store.product", "pk": 81, "fields": {
+    "name": "Industrial Network Sniffer", "slug": "industrial-network-sniffer",
+    "description": "Ruggedized hardware network capture device for industrial environments. Supports copper and fiber taps on PROFINET, EtherNet/IP, and standard Ethernet.",
+    "price": "450.00", "stock": 2, "category": 14, "tier": "pro",
+    "requires_declaration": true, "phase": 3, "active": true
+  }},
+  {"model": "store.product", "pk": 82, "fields": {
+    "name": "Deauther Watch", "slug": "deauther-watch",
+    "description": "Wearable ESP8266 device that runs WiFi deauthentication attacks for authorized network testing. Wristwatch form factor with OLED display and button controls.",
+    "price": "45.00", "stock": 10, "category": 8, "tier": "mid",
+    "requires_declaration": true, "phase": 2, "active": true
+  }},
+  {"model": "store.product", "pk": 83, "fields": {
+    "name": "DSTIKE Deauther OLED", "slug": "dstike-deauther-oled",
+    "description": "ESP8266-based WiFi deauther with OLED display and navigation buttons. Runs SpacehuhnTech deauther firmware. For authorized wireless network testing.",
+    "price": "28.00", "stock": 15, "category": 8, "tier": "entry",
+    "requires_declaration": true, "phase": 2, "active": true
+  }},
+  {"model": "store.product", "pk": 84, "fields": {
+    "name": "Key Croc", "slug": "key-croc",
+    "description": "Inline keylogger and HID tool by Hak5 disguised as a keyboard pass-through. Logs keystrokes and executes payloads triggered by typed keywords. For authorized red team physical ops.",
+    "price": "99.00", "stock": 6, "category": 1, "tier": "mid",
+    "requires_declaration": true, "phase": 2, "active": true
+  }},
+  {"model": "store.product", "pk": 85, "fields": {
+    "name": "Screen Crab", "slug": "screen-crab",
+    "description": "HDMI pass-through capture implant by Hak5. Silently records screen output to microSD or exfiltrates via WiFi. For authorized physical security audits.",
+    "price": "149.00", "stock": 4, "category": 1, "tier": "mid",
+    "requires_declaration": true, "phase": 2, "active": true
+  }}
+]

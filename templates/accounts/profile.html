@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Perfil | ViNEK TECH{% endblock %}
+
+{% block content %}
+<section class="container section">
+    <div class="form-panel" style="max-width:740px;margin:0 auto;">
+        <h1 class="panel-title">Perfil</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-row"><label>Nombre completo</label><input type="text" name="full_name" value="{{ profile.full_name }}"></div>
+            <div class="form-row"><label>Telefono</label><input type="text" name="phone" value="{{ profile.phone }}"></div>
+            <div class="form-row"><label>Empresa</label><input type="text" name="company" value="{{ profile.company }}"></div>
+            <div class="form-row"><label>Direccion</label><input type="text" name="address" value="{{ profile.address }}"></div>
+            <div class="form-row"><label>Ciudad</label><input type="text" name="city" value="{{ profile.city }}"></div>
+            <div class="form-row"><label>Pais</label><input type="text" name="country" value="{{ profile.country }}"></div>
+            <button class="btn" type="submit">Guardar cambios</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Pedido confirmado | ViNEK TECH{% endblock %}
+
+{% block content %}
+<section class="container section">
+    <div class="tech-card">
+        <h1 class="panel-title">Pedido confirmado</h1>
+        <p>Gracias por comprar en ViNEK TECH. Tu numero de orden es <strong>#{{ order.id }}</strong>.</p>
+        <p>Estado actual: <span class="tag-ok">{{ order.get_status_display }}</span></p>
+        <p>Zona de envio: <strong>{{ order.shipping_zone }}</strong></p>
+        {% if order.estimated_delivery %}
+            <p>Entrega estimada: <strong>{{ order.estimated_delivery|date:'d/m/Y' }}</strong></p>
+        {% endif %}
+        {% if order.coupon_code %}
+            <p>Cupon aplicado: <strong>{{ order.coupon_code }}</strong></p>
+        {% endif %}
+        <p>Total: <strong>RD$ {{ order.total }}</strong></p>
+        <div class="inline-actions">
+            <a class="btn" href="{% url 'store:catalog' %}">Seguir comprando</a>
+            <a class="btn btn-outline" href="{% url 'store:home' %}">Inicio</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
