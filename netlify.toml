@@ -1,0 +1,8 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/*"
+  to = "https://vinektech-demo.onrender.com/:splat"
+  status = 301
+  force = true
