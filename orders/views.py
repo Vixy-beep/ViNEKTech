@@ -2,13 +2,19 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
+from django.views.decorators.http import require_http_methods
+from django.http import JsonResponse
 from decimal import Decimal
+import stripe
+from django.conf import settings
 
 from cart.utils import CART_SESSION_KEY, cart_items
 
 from .forms import CheckoutForm
 from .models import Coupon, Order, OrderItem
 from .shipping import SHIPPING_ZONES, calculate_shipping, estimate_delivery
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 def checkout(request):
@@ -133,5 +139,118 @@ def track_order(request):
 @login_required
 def account_orders(request):
 	return render(request, 'accounts/account.html', {'orders': request.user.orders.all()})
+
+
+@require_http_methods(['POST'])
+def create_checkout_session(request):
+	"""Create a Stripe Checkout Session for an existing order"""
+	try:
+		order_id = request.POST.get('order_id', '').strip()
+		order = get_object_or_404(Order, pk=order_id)
+		
+		# Security: only allow user to pay their own orders
+		if order.user and request.user != order.user:
+			return JsonResponse({'error': 'Acceso denegado'}, status=403)
+		
+		# Verify email for non-authenticated orders
+		if not order.user and request.POST.get('email', '').lower() != order.email.lower():
+			return JsonResponse({'error': 'Email no coincide'}, status=403)
+		
+		# Create line items for Stripe
+		line_items = []
+		for item in order.items.all():
+			line_items.append({
+				'price_data': {
+					'currency': 'usd',  # Stripe uses USD
+					'unit_amount': int(item.unit_price * 100),  # Convert to cents
+					'product_data': {
+						'name': item.product.localized_name,
+						'description': f"SKU: {item.product.slug}",
+						'images': [item.product.image_url] if item.product.image_url else [],
+					},
+				},
+				'quantity': item.quantity,
+			})
+		
+		# Add shipping as line item
+		line_items.append({
+			'price_data': {
+				'currency': 'usd',
+				'unit_amount': int((order.shipping_cost / Decimal('62')) * 100),  # Convert DOP to USD
+				'product_data': {
+					'name': f'Envio ({order.get_shipping_zone_display()})',
+				},
+			},
+			'quantity': 1,
+		})
+		
+		# Add discount if applicable
+		if order.discount_amount > 0:
+			line_items.append({
+				'price_data': {
+					'currency': 'usd',
+					'unit_amount': -int((order.discount_amount / Decimal('62')) * 100),  # Negative for discount
+					'product_data': {
+						'name': f'Descuento ({order.coupon_code})',
+					},
+				},
+				'quantity': 1,
+			})
+		
+		# Create Stripe session
+		session = stripe.checkout.Session.create(
+			payment_method_types=['card', 'wallet'],  # Card + Apple Pay/Google Pay
+			line_items=line_items,
+			mode='payment',
+			success_url=request.build_absolute_uri(f'/orders/{order_id}/confirmation/'),
+			cancel_url=request.build_absolute_uri(f'/orders/{order_id}/'),
+			customer_email=order.email,
+			client_reference_id=str(order.id),
+			metadata={
+				'order_id': str(order.id),
+				'customer_name': order.full_name,
+				'country': order.country,
+			},
+		)
+		
+		return JsonResponse({'sessionId': session.id})
+	except Exception as e:
+		return JsonResponse({'error': str(e)}, status=400)
+
+
+@require_http_methods(['POST'])
+def stripe_webhook(request):
+	"""Handle Stripe webhook events (payment success, failure, etc.)"""
+	import json
+	
+	payload = request.body
+	sig_header = request.META.get('HTTP_STRIPE_SIGNATURE')
+	
+	try:
+		event = stripe.Webhook.construct_event(
+			payload, sig_header, settings.STRIPE_WEBHOOK_SECRET
+		)
+	except ValueError:
+		return JsonResponse({'error': 'Invalid payload'}, status=400)
+	except stripe.error.SignatureVerificationError:
+		return JsonResponse({'error': 'Invalid signature'}, status=400)
+	
+	# Handle checkout session completed
+	if event['type'] == 'checkout.session.completed':
+		session = event['data']['object']
+		order_id = session.get('client_reference_id')
+		
+		if order_id:
+			order = Order.objects.filter(pk=order_id).first()
+			if order:
+				order.paid = True
+				order.payment_method = 'stripe'
+				order.stripe_session_id = session['id']
+				order.save(update_fields=['paid', 'payment_method', 'stripe_session_id'])
+				
+				# Send confirmation email
+				order.send_confirmation_email()
+	
+	return JsonResponse({'status': 'success'}, status=200)
 
 # Create your views here.

@@ -80,6 +80,7 @@ class Product(models.Model):
 	stock = models.PositiveIntegerField(default=0)
 	compare_at_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
 	stock_quantity = models.PositiveIntegerField(default=0)
+	image_url = models.URLField(blank=True, null=True, help_text='URL de imagen del producto (Unsplash, etc.)')
 	tier = models.CharField(max_length=10, choices=TIER_CHOICES, default=TIER_ENTRY)
 	requires_declaration = models.BooleanField(default=False)
 	phase = models.PositiveSmallIntegerField(default=1)

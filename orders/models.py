@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
+from django.conf import settings
 
 from store.models import Product
 
@@ -34,6 +36,9 @@ class Order(models.Model):
 	coupon_code = models.CharField(max_length=40, blank=True)
 	payment_provider = models.CharField(max_length=40, default='manual')
 	payment_reference = models.CharField(max_length=120, blank=True)
+	paid = models.BooleanField(default=False)
+	payment_method = models.CharField(max_length=40, blank=True, help_text='stripe, paypal, manual, etc.')
+	stripe_session_id = models.CharField(max_length=255, blank=True)
 	declaration_text = models.TextField(blank=True)
 	declaration_accepted = models.BooleanField(default=False)
 	declaration_accepted_at = models.DateTimeField(blank=True, null=True)
@@ -47,6 +52,40 @@ class Order(models.Model):
 
 	def __str__(self):
 		return f'Order #{self.pk}'
+
+	def get_shipping_zone_display(self):
+		"""Return readable shipping zone name"""
+		zone_names = {
+			'santo_domingo': 'Santo Domingo',
+			'santiago': 'Santiago',
+			'interior': 'Interior del país',
+			'express': 'Express 24h',
+		}
+		return zone_names.get(self.shipping_zone, self.shipping_zone)
+
+	def send_confirmation_email(self):
+		"""Send order confirmation email"""
+		subject = f'Pedido confirmado #{self.id} - ViNEK TECH'
+		message = f"""
+Hola {self.full_name},
+
+Tu pedido ha sido confirmado. Aqui están los detalles:
+
+Numero de orden: #{self.id}
+Total: RD$ {self.total}
+Zona de envío: {self.get_shipping_zone_display()}
+Entrega estimada: {self.estimated_delivery.strftime('%d/%m/%Y') if self.estimated_delivery else 'Pronto'}
+
+Rastrear tu pedido: https://vinektech.com/orders/tracking/
+
+Gracias por comprar en ViNEK TECH!
+
+Team ViNEK
+		"""
+		try:
+			send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [self.email])
+		except Exception as e:
+			print(f'Error sending email: {e}')
 
 
 class Coupon(models.Model):

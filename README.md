@@ -115,6 +115,37 @@ Pasos demo recomendados en Render:
 
 Este setup es para demo/mostrable. Para lanzamiento oficial se ajustan seguridad estricta, pasarela de pago real, storage S3/R2 y observabilidad.
 
+## Pago con Stripe (integrado)
+
+El sistema está listo para procesar pagos via **Stripe Checkout** (tarjeta + wallets: Apple Pay, Google Pay).
+
+### Setup Stripe
+
+1. Crear cuenta en [stripe.com](https://stripe.com)
+2. Obtener claves en Dashboard > Developers > API keys
+3. Configurar en `.env`:
+
+```env
+STRIPE_PUBLIC_KEY=pk_test_...
+STRIPE_SECRET_KEY=sk_test_...
+STRIPE_WEBHOOK_SECRET=whsec_... # Opcional, necesario para webhooks en produccion
+```
+
+### Flujo de pago
+
+1. Cliente completa checkout (datos de envio)
+2. Genera orden (pendiente de pago)
+3. Ve confirmacion con boton "Pagar ahora con Stripe 💳"
+4. Lo redirige a Stripe Checkout
+5. Completa pago (tarjeta o wallet)
+6. Stripe confirma via webhook
+7. Orden marcada como `paid=True`
+
+### Testing Stripe
+
+- Tarjeta de prueba: `4242 4242 4242 4242`, expiry `12/25`, CVC `123`
+- Otras tarjetas: https://stripe.com/docs/testing
+
 ## Variables importantes
 
 Revisar `.env.example`:

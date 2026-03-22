@@ -16,10 +16,43 @@
             <p>Cupon aplicado: <strong>{{ order.coupon_code }}</strong></p>
         {% endif %}
         <p>Total: <strong>RD$ {{ order.total }}</strong></p>
+        
+        {% if not order.paid %}
+            <form id="payment-form" method="post" action="{% url 'orders:create_checkout_session' %}">
+                {% csrf_token %}
+                <input type="hidden" name="order_id" value="{{ order.id }}">
+                <p><strong>Proxima accion: Proceder al pago con Stripe</strong></p>
+                <button class="btn" type="submit">Pagar ahora con Stripe 💳</button>
+            </form>
+        {% else %}
+            <p><span class="tag-ok">✓ Pago completado</span></p>
+        {% endif %}
+        
         <div class="inline-actions">
             <a class="btn" href="{% url 'store:catalog' %}">Seguir comprando</a>
             <a class="btn btn-outline" href="{% url 'store:home' %}">Inicio</a>
         </div>
     </div>
 </section>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+document.getElementById('payment-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const response = await fetch('{% url "orders:create_checkout_session" %}', {
+        method: 'POST',
+        body: formData
+    });
+    
+    const data = await response.json();
+    if (data.error) {
+        alert('Error: ' + data.error);
+    } else {
+        // Redirect to Stripe Checkout
+        window.location.href = `https://checkout.stripe.com/pay/${data.sessionId}`;
+    }
+});
+</script>
 {% endblock %}
