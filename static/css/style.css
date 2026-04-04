@@ -286,6 +286,10 @@ a {
     box-shadow: 0 0 30px rgba(216, 255, 64, 0.4), inset 0 0 20px rgba(216, 255, 64, 0.1);
     min-height: 600px;
     padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .featured-grid > .featured-hero p {
@@ -294,12 +298,13 @@ a {
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-size: 1.8rem;
-    font-weight: 600;
-    line-height: 1.8;
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 2.2;
     color: #f5f3ee;
-    margin: 40px 0;
+    margin: 0;
     letter-spacing: 0.02em;
+    padding: 20px;
 }
 
 .product-card {
