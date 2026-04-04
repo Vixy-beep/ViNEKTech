@@ -277,10 +277,13 @@ a {
     gap: 16px;
 }
 
-/* Flipper Zero destacado: ocupa 2x2 */
-.grid-products > :first-child {
+/* Flipper Zero destacado: ocupa 2x2 SOLO en featured-grid */
+.featured-grid > .featured-hero {
     grid-column: span 2;
     grid-row: span 2;
+    background: linear-gradient(135deg, rgba(216, 255, 64, 0.15), rgba(255, 205, 92, 0.2));
+    border: 2px solid rgba(216, 255, 64, 0.8);
+    box-shadow: 0 0 30px rgba(216, 255, 64, 0.4), inset 0 0 20px rgba(216, 255, 64, 0.1);
 }
 
 .product-card {
@@ -374,6 +377,16 @@ a {
     border: 2px solid #d8ff40 !important;
     box-shadow: 0 0 20px rgba(216, 255, 64, 0.9), inset 0 0 15px rgba(216, 255, 64, 0.4), 0 0 40px rgba(216, 255, 64, 0.5);
     font-size: 0.9rem;
+}
+
+.featured-hero .tier-featured {
+    animation: glow-pulse-intense 1.5s ease-in-out infinite;
+    background: linear-gradient(135deg, rgba(216, 255, 64, 0.5), rgba(255, 205, 92, 0.4)) !important;
+    border: 2.5px solid #d8ff40 !important;
+    box-shadow: 0 0 30px rgba(216, 255, 64, 1), inset 0 0 20px rgba(216, 255, 64, 0.5), 0 0 60px rgba(216, 255, 64, 0.6);
+    font-size: 1rem;
+    font-weight: 900;
+    text-shadow: 0 0 10px rgba(216, 255, 64, 0.8);
 }
 
 @keyframes glow-pulse {

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}ViNEK TECH | Tienda Cyber{% endblock %}
 
@@ -65,9 +66,46 @@
             <h2>Destacados</h2>
             <a class="btn btn-outline" href="{% url 'store:catalog' %}">Ver todo</a>
         </div>
-        <div class="grid-products">
+        <div class="grid-products featured-grid">
             {% for product in featured_products %}
-                {% include 'components/product_card.html' %}
+                <article class="product-card {% if forloop.first %}featured-hero{% endif %}">
+                    <div class="product-image">
+                        {% if 'kit' in product.slug %}
+                            <img src="{% static 'img/brand/vinek-isotipo.png' %}" alt="{{ product.localized_name }}" loading="lazy" class="kit-logo-image">
+                        {% else %}
+                            {% with local_image='img/products/'|add:product.slug|add:'.jpg' %}
+                                <img
+                                    src="{% static local_image %}"
+                                    alt="{{ product.localized_name }}"
+                                    loading="lazy"
+                                    onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='grid';"
+                                >
+                                <div class="image-placeholder" style="display:none;">📦</div>
+                            {% endwith %}
+                        {% endif %}
+                    </div>
+                    <span class="tier-badge">{{ product.get_tier_display }}</span>
+                    {% if product.is_featured %}
+                        <span class="tier-badge tier-featured">⭐ DESTACADO</span>
+                    {% endif %}
+                    {% if product.is_bestseller %}
+                        <span class="tier-badge tier-hot">Mas vendido</span>
+                    {% endif %}
+                    <h3>{{ product.localized_name }}</h3>
+                    <p>{{ product.localized_short_description|truncatechars:120 }}</p>
+                    <div class="inline-actions">
+                        <a class="btn btn-outline" href="{{ product.get_absolute_url }}">Ver</a>
+                        {% if product.in_stock %}
+                            <a class="btn" href="{% url 'cart:add' product.id %}">Agregar</a>
+                        {% else %}
+                            <span class="tag-out">Sin stock</span>
+                        {% endif %}
+                    </div>
+                    <div class="price">RD$ {{ product.price_dop_value }}</div>
+                    {% if product.compare_at_price %}
+                        <small class="compare-price">Antes RD$ {{ product.compare_at_price }}</small>
+                    {% endif %}
+                </article>
             {% empty %}
                 <p>No hay productos destacados por ahora.</p>
             {% endfor %}
