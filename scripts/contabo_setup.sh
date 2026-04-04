@@ -50,6 +50,24 @@ apt install -y git nginx python3 python3-venv python3-pip certbot python3-certbo
 if [[ "$INSTALL_POSTGRES" -eq 1 ]]; then
   echo "[2/10] Installing PostgreSQL..."
   apt install -y postgresql postgresql-contrib
+  
+  echo "  Starting PostgreSQL..."
+  systemctl start postgresql
+  systemctl enable postgresql
+  
+  echo "  Generating secure database password..."
+  DB_PASSWORD=$(openssl rand -base64 16)
+  
+  echo "  Creating database and user..."
+  sudo -u postgres psql << PSQL_EOF
+CREATE USER vinektech WITH PASSWORD '$DB_PASSWORD';
+CREATE DATABASE vinektech OWNER vinektech;
+GRANT ALL PRIVILEGES ON DATABASE vinektech TO vinektech;
+PSQL_EOF
+  
+  echo "  PostgreSQL setup complete. DB password will be in .env"
+else
+  DB_PASSWORD="change-me-manually"
 fi
 
 echo "[3/10] Creating system user if needed..."
@@ -79,12 +97,13 @@ sudo -u "$APP_USER" "$APP_DIR/.venv/bin/pip" install gunicorn
 
 echo "[6/10] Preparing .env file if missing..."
 if [[ ! -f "$APP_DIR/.env" ]]; then
+  DJANGO_SECRET_KEY=$(openssl rand -base64 32)
   cat > "$APP_DIR/.env" <<EOF
 DJANGO_DEBUG=False
-DJANGO_SECRET_KEY=change-me
+DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY
 DJANGO_ALLOWED_HOSTS=$DOMAIN,www.$DOMAIN
 DJANGO_CSRF_TRUSTED_ORIGINS=https://$DOMAIN,https://www.$DOMAIN
-DATABASE_URL=postgresql://vinektech:change-me@127.0.0.1:5432/vinektech
+DATABASE_URL=postgresql://vinektech:$DB_PASSWORD@127.0.0.1:5432/vinektech
 DEFAULT_FROM_EMAIL=noreply@$DOMAIN
 EMAIL_HOST=smtp.example.com
 EMAIL_PORT=587
@@ -98,7 +117,7 @@ DJANGO_ADMIN_ALLOWED_IPS=
 EOF
   chown "$APP_USER:$APP_USER" "$APP_DIR/.env"
   chmod 600 "$APP_DIR/.env"
-  echo "Created .env at $APP_DIR/.env. Edit it before continuing."
+  echo "✓ Created .env with secure DB credentials. Review other placeholders before going live."
 fi
 
 echo "[7/10] Running migrations and collectstatic..."
