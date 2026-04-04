@@ -35,24 +35,33 @@
     </div>
 </section>
 
+{% if not order.paid and stripe_public_key %}
 <script src="https://js.stripe.com/v3/"></script>
 <script>
-document.getElementById('payment-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    
-    const formData = new FormData(this);
-    const response = await fetch('{% url "orders:create_checkout_session" %}', {
-        method: 'POST',
-        body: formData
+const paymentForm = document.getElementById('payment-form');
+if (paymentForm) {
+    paymentForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const stripe = Stripe('{{ stripe_public_key }}');
+        const formData = new FormData(this);
+        const response = await fetch('{% url "orders:create_checkout_session" %}', {
+            method: 'POST',
+            body: formData
+        });
+
+        const data = await response.json();
+        if (data.error) {
+            alert('Error: ' + data.error);
+            return;
+        }
+
+        const result = await stripe.redirectToCheckout({ sessionId: data.sessionId });
+        if (result.error) {
+            alert(result.error.message);
+        }
     });
-    
-    const data = await response.json();
-    if (data.error) {
-        alert('Error: ' + data.error);
-    } else {
-        // Redirect to Stripe Checkout
-        window.location.href = `https://checkout.stripe.com/pay/${data.sessionId}`;
-    }
-});
+}
 </script>
+{% endif %}
 {% endblock %}

@@ -5,5 +5,8 @@ __pycache__/
 .env
 staticfiles/
 media/
+imagenes/
+*.exe
+*.pptx
 .vscode/
 .DS_Store

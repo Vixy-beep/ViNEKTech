@@ -1,0 +1,87 @@
+slug | nombre | precio_dop | precio_usd
+------------------------------------------------------------------------------------------
+acr122u-nfc-reader | Lector NFC ACR122U | RD$ 2356.00 | USD$ 38.00
+alfa-awus036ach | Alfa AWUS036ACH | RD$ 3410.00 | USD$ 55.00
+alfa-awus036nha | Alfa AWUS036NHA | RD$ 2604.00 | USD$ 42.00
+anti-spy-detector | Detector antiespía | RD$ 3596.00 | USD$ 58.00
+bash-bunny | Bash Bunny | RD$ 9238.00 | USD$ 149.00
+beaglebone-black | BeagleBone Black | RD$ 4898.00 | USD$ 79.00
+bios-flash-programmer-ch341a | Programador flash BIOS CH341A | RD$ 868.00 | USD$ 14.00
+bluetooth-sniffer | Sniffer Bluetooth | RD$ 3658.00 | USD$ 59.00
+chameleon-ultra | Chameleon Ultra | RD$ 11718.00 | USD$ 189.00
+deauther-watch | Reloj Deauther | RD$ 3410.00 | USD$ 55.00
+digispark-usb | Digispark USB | RD$ 744.00 | USD$ 12.00
+digital-door-lock-tester | Probador de cerradura de puerta digital | RD$ 8990.00 | USD$ 145.00
+drone-signal-analyzer | Analizador de señal de drones | RD$ 9610.00 | USD$ 155.00
+dstike-deauther-oled | DSTIKE Deauther OLED | RD$ 2232.00 | USD$ 36.00
+eeprom-programmer | Programador EEPROM | RD$ 1984.00 | USD$ 32.00
+encrypted-usb-drive | Unidad USB cifrada | RD$ 3720.00 | USD$ 60.00
+esp32-dev-kit | Kit de desarrollo ESP32 | RD$ 868.00 | USD$ 14.00
+esp8266-nodemcu | ESP8266 NodeMCU | RD$ 620.00 | USD$ 10.00
+faraday-bag | Bolso Faraday | RD$ 1550.00 | USD$ 25.00
+faraday-box | Caja de Faraday | RD$ 4030.00 | USD$ 65.00
+flipper-zero | Flipper Zero | RD$ 15438.00 | USD$ 249.00
+glinet-travel-router | Router de viaje GL.iNet | RD$ 4278.00 | USD$ 69.00
+hackrf-one | HackRF One | RD$ 21638.00 | USD$ 349.00
+hardware-firewall-appliance | Dispositivo de firewall de hardware | RD$ 15438.00 | USD$ 249.00
+hardware-password-manager | Administrador de contraseñas de hardware | RD$ 3224.00 | USD$ 52.00
+hidden-camera-detector | Detector de cámara oculta | RD$ 2604.00 | USD$ 42.00
+industrial-network-sniffer | Sniffer de red industrial | RD$ 32798.00 | USD$ 529.00
+intel-nuc-mini-pc | Mini PC Intel NUC | RD$ 18290.00 | USD$ 295.00
+iot-security-testing-kit | Kit de pruebas de seguridad de IoT | RD$ 27838.00 | USD$ 449.00
+ir-blaster-receiver-kit | Kit de emisor de infrarrojos + receptor | RD$ 1116.00 | USD$ 18.00
+jtag-debugger | Depurador JTAG | RD$ 3224.00 | USD$ 52.00
+key-croc | Hak5 Key Croc | RD$ 7998.00 | USD$ 129.00
+key-decoder-tool | Herramienta decodificadora de claves | RD$ 4898.00 | USD$ 79.00
+keystroke-injector-usb | Inyector de pulsaciones de teclas USB | RD$ 1736.00 | USD$ 28.00
+kit-bug-bounty-starter | Kit: Bug Bounty Starter | RD$ 29698.00 | USD$ 479.00
+kit-full-sdr-lab | Kit: Full SDR Lab | RD$ 46438.00 | USD$ 749.00
+kit-iot-security-testing | Kit: IoT Security Testing | RD$ 21638.00 | USD$ 349.00
+kit-red-team-physical | Kit: Red Team Physical | RD$ 52638.00 | USD$ 849.00
+lan-turtle | Hak5 LAN Turtle | RD$ 6138.00 | USD$ 99.00
+laptop-privacy-screen | Pantalla de privacidad del portátil | RD$ 1860.00 | USD$ 30.00
+lock-pick-set | Juego de ganzúas (profesional) | RD$ 3410.00 | USD$ 55.00
+logic-analyzer-usb | Analizador Lógico USB | RD$ 2604.00 | USD$ 42.00
+lora-dev-board | Placa de desarrollo LoRa | RD$ 1488.00 | USD$ 24.00
+malduino | Malduino | RD$ 2170.00 | USD$ 35.00
+multiport-usb-data-switch | Conmutador de datos USB multipuerto | RD$ 2108.00 | USD$ 34.00
+network-packet-analyzer-device | Analizador de paquetes de red | RD$ 12338.00 | USD$ 199.00
+network-tap-hardware | Tap de red Ethernet | RD$ 3844.00 | USD$ 62.00
+nitrokey-pro-2 | Nitrokey Pro 2 | RD$ 5518.00 | USD$ 89.00
+nitrokey-storage-2 | Nitrokey Storage 2 | RD$ 7998.00 | USD$ 129.00
+nvidia-jetson-nano | NVIDIA Jetson Nano | RD$ 11098.00 | USD$ 179.00
+openwrt-router | Router OpenWRT | RD$ 6138.00 | USD$ 99.00
+packet-squirrel | Hak5 Packet Squirrel | RD$ 6138.00 | USD$ 99.00
+plunder-bug | Hak5 Plunder Bug | RD$ 3410.00 | USD$ 55.00
+portable-secure-power-bank | Banco de energía seguro portátil | RD$ 2790.00 | USD$ 45.00
+portable-vpn-router | Router VPN portatil | RD$ 4898.00 | USD$ 79.00
+proxmark3-rdv4 | Proxmark3 RDV4 | RD$ 21638.00 | USD$ 349.00
+pwnagotchi-kit | Kit Pwnagotchi | RD$ 6138.00 | USD$ 99.00
+raspberry-pi-4-4gb | Raspberry Pi 4 (4GB) | RD$ 5518.00 | USD$ 89.00
+raspberry-pi-5-8gb | Raspberry Pi 5 (8GB) | RD$ 7378.00 | USD$ 119.00
+raspberry-pi-zero-w | Raspberry Pi Zero W | RD$ 1736.00 | USD$ 28.00
+rf-signal-detector | Detector de señal RF | RD$ 2976.00 | USD$ 48.00
+rfid-cloner-kit | Kit de clonación RFID | RD$ 1984.00 | USD$ 32.00
+rtl-sdr-dongle | Dongle RTL-SDR | RD$ 2604.00 | USD$ 42.00
+scada-test-device | Dispositivo de prueba SCADA | RD$ 27838.00 | USD$ 449.00
+screen-crab | Hak5 Screen Crab | RD$ 11718.00 | USD$ 189.00
+secure-charging-cable | Cable de carga seguro | RD$ 992.00 | USD$ 16.00
+secure-kvm-switch | Conmutador KVM seguro | RD$ 12338.00 | USD$ 199.00
+shark-jack | Hak5 Shark Jack | RD$ 6138.00 | USD$ 99.00
+sim-card-reader-writer | Lector/escritor de tarjetas SIM | RD$ 2604.00 | USD$ 42.00
+smart-home-pentest-kit | Kit de pentest Smart Home | RD$ 13950.00 | USD$ 225.00
+solokey-security-key | SoloKey Security Key | RD$ 2356.00 | USD$ 38.00
+thermal-camera-module | Módulo de cámara térmica | RD$ 6138.00 | USD$ 99.00
+tp-link-wn722n | TP-Link TL-WN722N v1 | RD$ 1364.00 | USD$ 22.00
+ubertooth-one | Ubertooth One | RD$ 9238.00 | USD$ 149.00
+universal-remote-hacking-device | Dispositivo de hacking remoto universal | RD$ 3844.00 | USD$ 62.00
+usb-armory-mk-ii | USB Armory Mk II | RD$ 12338.00 | USD$ 199.00
+usb-data-blocker | Bloqueador de datos USB | RD$ 868.00 | USD$ 14.00
+usb-power-monitor | Monitor de alimentación USB | RD$ 1240.00 | USD$ 20.00
+usb-protocol-analyzer | Analizador de protocolo USB | RD$ 6758.00 | USD$ 109.00
+usb-rubber-ducky | USB Rubber Ducky | RD$ 5518.00 | USD$ 89.00
+webcam-cover-slider | Control deslizante de la cubierta de la cámara web | RD$ 496.00 | USD$ 8.00
+wifi-pineapple | Hak5 WiFi Pineapple | RD$ 17918.00 | USD$ 289.00
+yard-stick-one | Yard Stick One | RD$ 7378.00 | USD$ 119.00
+yubikey-5-nfc | YubiKey 5 NFC | RD$ 4464.00 | USD$ 72.00
+zigbee-sniffer | Sniffer Zigbee | RD$ 3410.00 | USD$ 55.00

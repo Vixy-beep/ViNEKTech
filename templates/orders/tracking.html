@@ -4,37 +4,85 @@
 
 {% block content %}
 <section class="container section">
-    <div class="checkout-layout">
-        <article class="form-panel">
-            <h1 class="panel-title">Seguimiento de pedido</h1>
-            <form method="post">
-                {% csrf_token %}
-                <div class="form-row">
-                    <label>Numero de orden</label>
-                    <input type="text" name="order_id" placeholder="Ej: 1024">
+    <div class="tracking-layout">
+        <article class="content-panel">
+            <div class="catalog-toolbar">
+                <div class="toolbar-left">
+                    <h1 class="panel-title">Tus pedidos</h1>
+                    <span>{{ orders|length }} ordenes</span>
                 </div>
-                <div class="form-row">
-                    <label>Email de compra</label>
-                    <input type="email" name="email" placeholder="correo@dominio.com">
+            </div>
+
+            {% if orders %}
+                <div class="orders-list">
+                    {% for current in orders %}
+                        <a class="order-row {% if order and order.id == current.id %}active{% endif %}" href="?order={{ current.id }}">
+                            <div>
+                                <strong>Pedido #{{ current.id }}</strong>
+                                <small>{{ current.created_at|date:'d/m/Y H:i' }}</small>
+                            </div>
+                            <div>
+                                <span class="tier-badge">{{ current.get_status_display }}</span>
+                            </div>
+                            <div><strong>RD$ {{ current.total }}</strong></div>
+                        </a>
+                    {% endfor %}
                 </div>
-                <button class="btn" type="submit">Consultar</button>
-            </form>
-            {% if error %}
-                <p class="tag-out">{{ error }}</p>
+            {% else %}
+                <p>No tienes pedidos todavia.</p>
+                <a class="btn" href="{% url 'store:catalog' %}">Explorar catalogo</a>
             {% endif %}
         </article>
-        <aside class="content-panel">
-            <h3 class="panel-title">Resultado</h3>
+
+        <aside class="form-panel">
+            <h3 class="panel-title">Detalle del pedido</h3>
             {% if order %}
+                <div class="tracking-hero">
+                    <div class="truck-icon">🚚</div>
+                    <div>
+                        <strong>Tu pedido va en ruta</strong>
+                        <p>Monitorea cada etapa en tiempo real desde tu cuenta.</p>
+                    </div>
+                </div>
+
+                <div class="order-progress" aria-label="Progreso del pedido">
+                    <div class="progress-step {% if order.progress_stage >= 1 %}active{% endif %}">
+                        <span class="dot"></span>
+                        <small>Pending</small>
+                    </div>
+                    <div class="progress-line {% if order.progress_stage >= 2 %}active{% endif %}"></div>
+                    <div class="progress-step {% if order.progress_stage >= 2 %}active{% endif %}">
+                        <span class="dot"></span>
+                        <small>Paid</small>
+                    </div>
+                    <div class="progress-line {% if order.progress_stage >= 3 %}active{% endif %}"></div>
+                    <div class="progress-step {% if order.progress_stage >= 3 %}active{% endif %}">
+                        <span class="dot"></span>
+                        <small>Shipped</small>
+                    </div>
+                </div>
+
                 <p><strong>Orden:</strong> #{{ order.id }}</p>
                 <p><strong>Estado:</strong> {{ order.get_status_display }}</p>
                 <p><strong>Total:</strong> RD$ {{ order.total }}</p>
+                <p><strong>Pago:</strong>
+                    {% if order.paid %}
+                        <span class="tag-ok">Completado</span>
+                    {% else %}
+                        <span class="tag-out">Pendiente</span>
+                    {% endif %}
+                </p>
                 <p><strong>Guia:</strong> {{ order.tracking_number|default:'Pendiente' }}</p>
                 {% if order.estimated_delivery %}
                     <p><strong>Entrega estimada:</strong> {{ order.estimated_delivery|date:'d/m/Y' }}</p>
                 {% endif %}
+
+                <div class="inline-actions" style="margin-top:12px;">
+                    <a class="btn" href="{% url 'orders:confirmation' order.id %}">Ver pedido</a>
+                    <a class="btn btn-outline" href="{% url 'store:catalog' %}">Comprar de nuevo</a>
+                </div>
             {% else %}
-                <p>Introduce datos para buscar tu pedido.</p>
+                <p>Selecciona un pedido para ver su estado.</p>
             {% endif %}
         </aside>
     </div>

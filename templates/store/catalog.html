@@ -5,13 +5,20 @@
 {% block content %}
 <section class="container filters-layout">
     <aside class="filters">
-        <h2 class="panel-title">Filtros</h2>
-        <form method="get">
-            <div class="form-row">
+        <div class="filters-head">
+            <h2 class="panel-title">Refinar resultados</h2>
+            <a class="btn btn-outline btn-clear" href="{% url 'store:catalog' %}">Limpiar</a>
+        </div>
+        <form method="get" class="filters-form">
+            <input type="hidden" name="sort" value="{{ sort }}">
+            <input type="hidden" name="per_page" value="{{ per_page }}">
+
+            <div class="filter-block">
                 <label>Buscar</label>
                 <input type="text" name="q" value="{{ query }}" placeholder="router, flipper, wifi...">
             </div>
-            <div class="form-row">
+
+            <div class="filter-block">
                 <label>Categoria</label>
                 <select name="category">
                     <option value="">Todas</option>
@@ -20,7 +27,8 @@
                     {% endfor %}
                 </select>
             </div>
-            <div class="form-row">
+
+            <div class="filter-block">
                 <label>Tier</label>
                 <select name="tier">
                     <option value="">Todos</option>
@@ -29,32 +37,63 @@
                     <option value="pro" {% if selected_tier == 'pro' %}selected{% endif %}>Pro</option>
                 </select>
             </div>
-            <div class="form-row">
-                <label>Precio minimo</label>
-                <input type="number" name="min_price" value="{{ min_price }}">
+
+            <div class="filter-block">
+                <label>Rango de precio</label>
+                <div class="price-range-row">
+                    <input type="number" name="min_price" value="{{ min_price }}" placeholder="Min">
+                    <span>a</span>
+                    <input type="number" name="max_price" value="{{ max_price }}" placeholder="Max">
+                </div>
             </div>
-            <div class="form-row">
-                <label>Precio maximo</label>
-                <input type="number" name="max_price" value="{{ max_price }}">
+
+            <div class="filter-actions">
+                <button class="btn" type="submit">Aplicar filtros</button>
             </div>
-            <div class="form-row">
-                <label>Ordenar</label>
-                <select name="sort">
-                    <option value="newest" {% if sort == 'newest' %}selected{% endif %}>Mas nuevos</option>
-                    <option value="price_asc" {% if sort == 'price_asc' %}selected{% endif %}>Precio menor</option>
-                    <option value="price_desc" {% if sort == 'price_desc' %}selected{% endif %}>Precio mayor</option>
-                    <option value="name" {% if sort == 'name' %}selected{% endif %}>Nombre</option>
-                </select>
-            </div>
-            <button class="btn" type="submit">Aplicar</button>
         </form>
     </aside>
 
     <div class="content-panel">
-        <div class="section-head">
-            <h2>Catalogo</h2>
-            <span>{{ products|length }} resultados</span>
+        <div class="catalog-toolbar">
+            <div class="toolbar-left">
+                <h2>Catalogo</h2>
+                <span>{{ total_results }} resultados</span>
+            </div>
+            <div class="toolbar-right">
+                <form method="get" class="toolbar-form">
+                    {% if query %}<input type="hidden" name="q" value="{{ query }}">{% endif %}
+                    {% if selected_category %}<input type="hidden" name="category" value="{{ selected_category }}">{% endif %}
+                    {% if selected_tier %}<input type="hidden" name="tier" value="{{ selected_tier }}">{% endif %}
+                    {% if min_price %}<input type="hidden" name="min_price" value="{{ min_price }}">{% endif %}
+                    {% if max_price %}<input type="hidden" name="max_price" value="{{ max_price }}">{% endif %}
+                    <label for="sort">Ordenar</label>
+                    <select id="sort" name="sort" onchange="this.form.submit()">
+                        <option value="newest" {% if sort == 'newest' %}selected{% endif %}>Mas nuevos</option>
+                        <option value="price_asc" {% if sort == 'price_asc' %}selected{% endif %}>Precio menor</option>
+                        <option value="price_desc" {% if sort == 'price_desc' %}selected{% endif %}>Precio mayor</option>
+                        <option value="name" {% if sort == 'name' %}selected{% endif %}>Nombre</option>
+                    </select>
+                    <input type="hidden" name="per_page" value="{{ per_page }}">
+                </form>
+
+                <form method="get" class="toolbar-form">
+                    {% if query %}<input type="hidden" name="q" value="{{ query }}">{% endif %}
+                    {% if selected_category %}<input type="hidden" name="category" value="{{ selected_category }}">{% endif %}
+                    {% if selected_tier %}<input type="hidden" name="tier" value="{{ selected_tier }}">{% endif %}
+                    {% if min_price %}<input type="hidden" name="min_price" value="{{ min_price }}">{% endif %}
+                    {% if max_price %}<input type="hidden" name="max_price" value="{{ max_price }}">{% endif %}
+                    <input type="hidden" name="sort" value="{{ sort }}">
+                    <label for="per_page">Mostrar</label>
+                    <select id="per_page" name="per_page" onchange="this.form.submit()">
+                        <option value="12" {% if per_page == 12 %}selected{% endif %}>12</option>
+                        <option value="24" {% if per_page == 24 %}selected{% endif %}>24</option>
+                        <option value="48" {% if per_page == 48 %}selected{% endif %}>48</option>
+                        <option value="96" {% if per_page == 96 %}selected{% endif %}>96</option>
+                    </select>
+                </form>
+            </div>
         </div>
+
         <div class="grid-products">
             {% for product in products %}
                 {% include 'components/product_card.html' %}
@@ -65,11 +104,11 @@
         {% if page_obj.has_other_pages %}
             <div class="pagination">
                 {% if page_obj.has_previous %}
-                    <a class="btn btn-outline" href="?{% if query %}q={{ query }}&{% endif %}{% if selected_category %}category={{ selected_category }}&{% endif %}{% if selected_tier %}tier={{ selected_tier }}&{% endif %}{% if min_price %}min_price={{ min_price }}&{% endif %}{% if max_price %}max_price={{ max_price }}&{% endif %}{% if sort %}sort={{ sort }}&{% endif %}page={{ page_obj.previous_page_number }}">Anterior</a>
+                    <a class="btn btn-outline" href="?{% if query %}q={{ query }}&{% endif %}{% if selected_category %}category={{ selected_category }}&{% endif %}{% if selected_tier %}tier={{ selected_tier }}&{% endif %}{% if min_price %}min_price={{ min_price }}&{% endif %}{% if max_price %}max_price={{ max_price }}&{% endif %}{% if sort %}sort={{ sort }}&{% endif %}{% if per_page %}per_page={{ per_page }}&{% endif %}page={{ page_obj.previous_page_number }}">Anterior</a>
                 {% endif %}
                 <span>Pagina {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
                 {% if page_obj.has_next %}
-                    <a class="btn btn-outline" href="?{% if query %}q={{ query }}&{% endif %}{% if selected_category %}category={{ selected_category }}&{% endif %}{% if selected_tier %}tier={{ selected_tier }}&{% endif %}{% if min_price %}min_price={{ min_price }}&{% endif %}{% if max_price %}max_price={{ max_price }}&{% endif %}{% if sort %}sort={{ sort }}&{% endif %}page={{ page_obj.next_page_number }}">Siguiente</a>
+                    <a class="btn btn-outline" href="?{% if query %}q={{ query }}&{% endif %}{% if selected_category %}category={{ selected_category }}&{% endif %}{% if selected_tier %}tier={{ selected_tier }}&{% endif %}{% if min_price %}min_price={{ min_price }}&{% endif %}{% if max_price %}max_price={{ max_price }}&{% endif %}{% if sort %}sort={{ sort }}&{% endif %}{% if per_page %}per_page={{ per_page }}&{% endif %}page={{ page_obj.next_page_number }}">Siguiente</a>
                 {% endif %}
             </div>
         {% endif %}

@@ -46,6 +46,14 @@ def catalog(request):
 	min_price = request.GET.get('min_price', '').strip()
 	max_price = request.GET.get('max_price', '').strip()
 	sort = request.GET.get('sort', '-created_at').strip()
+	per_page_raw = request.GET.get('per_page', '24').strip()
+	allowed_per_page = {12, 24, 48, 96}
+	try:
+		per_page = int(per_page_raw)
+	except (TypeError, ValueError):
+		per_page = 24
+	if per_page not in allowed_per_page:
+		per_page = 24
 
 	if query:
 		products = products.filter(Q(name__icontains=query) | Q(description__icontains=query))
@@ -65,7 +73,7 @@ def catalog(request):
 		'name': 'name',
 	}
 	products = products.order_by(sort_map.get(sort, '-created_at'))
-	paginator = Paginator(products, 12)
+	paginator = Paginator(products, per_page)
 	page_obj = paginator.get_page(request.GET.get('page'))
 
 	return render(
@@ -80,6 +88,8 @@ def catalog(request):
 			'sort': sort,
 			'min_price': min_price,
 			'max_price': max_price,
+			'per_page': per_page,
+			'total_results': paginator.count,
 			'page_obj': page_obj,
 		},
 	)
