@@ -51,24 +51,33 @@ if [[ "$INSTALL_POSTGRES" -eq 1 ]]; then
   echo "[2/10] Installing PostgreSQL..."
   apt install -y postgresql postgresql-contrib
   
-  echo "  Starting PostgreSQL..."
-  systemctl start postgresql
+  echo "  Starting PostgreSQL service..."
+  systemctl restart postgresql
   systemctl enable postgresql
   
-  # Wait for PostgreSQL to be ready
-  sleep 3
+  # Wait longer for PostgreSQL to start
+  echo "  Waiting for PostgreSQL to be ready..."
+  for i in {1..30}; do
+    if sudo -u postgres psql -c "SELECT 1" >/dev/null 2>&1; then
+      echo "  ✓ PostgreSQL is ready"
+      break
+    fi
+    echo "    Attempt $i/30..."
+    sleep 1
+  done
   
   echo "  Configuring PostgreSQL to listen on TCP..."
-  sudo -u postgres psql -c "ALTER SYSTEM SET listen_addresses = 'localhost';" 2>/dev/null || true
+  sudo -u postgres psql -c "ALTER SYSTEM SET listen_addresses = 'localhost';" >/dev/null 2>&1 || true
   
-  # Get pg_hba.conf location - handle case where it might not exist yet
-  PG_HBA=$(sudo -u postgres psql -t -c "SHOW hba_file;" 2>/dev/null | tr -d ' ' | tr -d '\n') || PG_HBA="/etc/postgresql/16/main/pg_hba.conf"
+  echo "  Restarting PostgreSQL with new config..."
+  systemctl restart postgresql
+  sleep 5
   
-  # Only modify pg_hba.conf if it exists
-  if [[ -f "$PG_HBA" ]]; then
-    if ! grep -q "host.*vinektech.*127.0.0.1" "$PG_HBA"; then
-      echo "host    vinektech    vinektech    127.0.0.1/32    scram-sha-256" | sudo tee -a "$PG_HBA" > /dev/null
-    fi
+  # Verify PostgreSQL is running and responsive
+  if ! sudo -u postgres psql -c "SELECT 1" >/dev/null 2>&1; then
+    echo "  ✗ PostgreSQL failed to start. Checking logs..."
+    journalctl -u postgresql -n 20
+    exit 1
   fi
   
   echo "  Generating secure database password..."
@@ -81,11 +90,12 @@ CREATE DATABASE vinektech OWNER vinektech;
 GRANT ALL PRIVILEGES ON DATABASE vinektech TO vinektech;
 PSQL_EOF
   
-  echo "  Restarting PostgreSQL with new config..."
-  systemctl restart postgresql
-  sleep 3
-  
-  echo "  ✓ PostgreSQL setup complete. DB password will be in .env"
+  if [[ $? -eq 0 ]]; then
+    echo "  ✓ PostgreSQL setup complete"
+  else
+    echo "  ✗ Failed to create database/user"
+    exit 1
+  fi
 else
   DB_PASSWORD="change-me-manually"
 fi
@@ -144,7 +154,28 @@ echo "[7/10] Running migrations and collectstatic..."
 set -a
 source "$APP_DIR/.env"
 set +a
-sudo -u "$APP_USER" "$APP_DIR/.venv/bin/python" "$APP_DIR/manage.py" migrate --noinput
+
+# Retry migrations with exponential backoff
+MIGRATE_RETRIES=5
+RETRY_COUNT=0
+until [[ $RETRY_COUNT -ge $MIGRATE_RETRIES ]]; do
+  if sudo -u "$APP_USER" "$APP_DIR/.venv/bin/python" "$APP_DIR/manage.py" migrate --noinput 2>/dev/null; then
+    echo "✓ Migrations completed successfully"
+    break
+  else
+    RETRY_COUNT=$((RETRY_COUNT+1))
+    if [[ $RETRY_COUNT -lt $MIGRATE_RETRIES ]]; then
+      WAIT_TIME=$((RETRY_COUNT * 3))
+      echo "  Migrations failed, retrying in ${WAIT_TIME}s (attempt $RETRY_COUNT/$MIGRATE_RETRIES)..."
+      sleep $WAIT_TIME
+    else
+      echo "✗ Migrations failed after $MIGRATE_RETRIES attempts"
+      echo "  Check PostgreSQL is running: systemctl status postgresql"
+      exit 1
+    fi
+  fi
+done
+
 sudo -u "$APP_USER" "$APP_DIR/.venv/bin/python" "$APP_DIR/manage.py" collectstatic --noinput
 
 echo "[8/10] Configuring Gunicorn service..."
