@@ -277,6 +277,12 @@ a {
     gap: 16px;
 }
 
+/* Flipper Zero destacado: ocupa 2x2 */
+.grid-products > :first-child {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
 .product-card {
     background: linear-gradient(170deg, rgba(34, 25, 10, 0.88), rgba(8, 7, 5, 0.95));
     border: 1px solid rgba(255, 199, 74, 0.28);
@@ -362,12 +368,29 @@ a {
     box-shadow: 0 0 12px rgba(216, 255, 64, 0.6), inset 0 0 8px rgba(216, 255, 64, 0.2);
 }
 
+.grid-products > :first-child .tier-featured {
+    animation: glow-pulse-intense 1.5s ease-in-out infinite;
+    background: linear-gradient(135deg, rgba(216, 255, 64, 0.4), rgba(255, 205, 92, 0.3)) !important;
+    border: 2px solid #d8ff40 !important;
+    box-shadow: 0 0 20px rgba(216, 255, 64, 0.9), inset 0 0 15px rgba(216, 255, 64, 0.4), 0 0 40px rgba(216, 255, 64, 0.5);
+    font-size: 0.9rem;
+}
+
 @keyframes glow-pulse {
     0%, 100% {
         box-shadow: 0 0 12px rgba(216, 255, 64, 0.6), inset 0 0 8px rgba(216, 255, 64, 0.2);
     }
     50% {
         box-shadow: 0 0 20px rgba(216, 255, 64, 0.9), inset 0 0 12px rgba(216, 255, 64, 0.4);
+    }
+}
+
+@keyframes glow-pulse-intense {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(216, 255, 64, 0.9), inset 0 0 15px rgba(216, 255, 64, 0.4), 0 0 40px rgba(216, 255, 64, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(216, 255, 64, 1), inset 0 0 20px rgba(216, 255, 64, 0.6), 0 0 60px rgba(216, 255, 64, 0.8);
     }
 }
 
@@ -770,6 +793,19 @@ textarea:focus {
     color: var(--text-1);
     margin: 4px 0;
     display: block;
+}
+
+.footer-disclaimer {
+    padding: 14px 0;
+    border-top: 1px solid rgba(255, 199, 74, 0.12);
+    text-align: center;
+}
+
+.footer-disclaimer small {
+    color: rgba(199, 190, 169, 0.65);
+    font-size: 0.75rem;
+    line-height: 1.4;
+}
 }
 
 .flash-list {

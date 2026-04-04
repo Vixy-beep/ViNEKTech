@@ -10,7 +10,16 @@ from .models import Category, NewsletterLead, Product
 
 
 def home(request):
-	featured_products = Product.objects.filter(active=True, is_featured=True)[:8]
+	# Flipper Zero primero si existe y está featured, luego otros featured
+	flipper = Product.objects.filter(active=True, slug='flipper-zero', is_featured=True).first()
+	other_featured = Product.objects.filter(active=True, is_featured=True).exclude(slug='flipper-zero')[:7]
+	featured_products = []
+	if flipper:
+		featured_products.append(flipper)
+		featured_products.extend(list(other_featured))
+	else:
+		featured_products = list(Product.objects.filter(active=True, is_featured=True)[:8])
+	
 	latest_products = Product.objects.filter(active=True)[:8]
 	tiers = {
 		'entry': Product.objects.filter(active=True, tier=Product.TIER_ENTRY)[:4],
