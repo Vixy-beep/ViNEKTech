@@ -6,9 +6,9 @@ from django.utils import timezone
 FREE_SHIPPING_THRESHOLD = Decimal('5000')
 
 SHIPPING_ZONES = {
-    'santo_domingo': {'label': 'Santo Domingo', 'rate': Decimal('200'), 'eta_days': 1},
-    'interior': {'label': 'Interior del pais', 'rate': Decimal('350'), 'eta_days': 3},
-    'international': {'label': 'Internacional', 'rate': Decimal('1200'), 'eta_days': 7},
+    'santo_domingo': {'label': 'Santo Domingo', 'rate': Decimal('200'), 'eta_days': 14},
+    'interior': {'label': 'Interior del pais', 'rate': Decimal('350'), 'eta_days': 14},
+    'international': {'label': 'Internacional', 'rate': Decimal('1200'), 'eta_days': 21},
 }
 
 
