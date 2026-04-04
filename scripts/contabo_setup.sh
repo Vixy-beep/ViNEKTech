@@ -155,28 +155,37 @@ set -a
 source "$APP_DIR/.env"
 set +a
 
-# Retry migrations with exponential backoff
-MIGRATE_RETRIES=5
+# Retry migrations with exponential backoff - but don't block the entire setup
+MIGRATE_RETRIES=10
 RETRY_COUNT=0
+MIGRATE_SUCCESS=0
+
 until [[ $RETRY_COUNT -ge $MIGRATE_RETRIES ]]; do
-  if sudo -u "$APP_USER" "$APP_DIR/.venv/bin/python" "$APP_DIR/manage.py" migrate --noinput 2>/dev/null; then
+  if sudo -u "$APP_USER" "$APP_DIR/.venv/bin/python" "$APP_DIR/manage.py" migrate --noinput 2>&1 | grep -q "No migrations to apply"; then
+    echo "✓ Migrations completed successfully (no pending migrations)"
+    MIGRATE_SUCCESS=1
+    break
+  elif sudo -u "$APP_USER" "$APP_DIR/.venv/bin/python" "$APP_DIR/manage.py" migrate --noinput >/dev/null 2>&1; then
     echo "✓ Migrations completed successfully"
+    MIGRATE_SUCCESS=1
     break
   else
     RETRY_COUNT=$((RETRY_COUNT+1))
     if [[ $RETRY_COUNT -lt $MIGRATE_RETRIES ]]; then
-      WAIT_TIME=$((RETRY_COUNT * 3))
+      WAIT_TIME=$((2 ** (RETRY_COUNT - 1)))
       echo "  Migrations failed, retrying in ${WAIT_TIME}s (attempt $RETRY_COUNT/$MIGRATE_RETRIES)..."
       sleep $WAIT_TIME
-    else
-      echo "✗ Migrations failed after $MIGRATE_RETRIES attempts"
-      echo "  Check PostgreSQL is running: systemctl status postgresql"
-      exit 1
     fi
   fi
 done
 
-sudo -u "$APP_USER" "$APP_DIR/.venv/bin/python" "$APP_DIR/manage.py" collectstatic --noinput
+if [[ $MIGRATE_SUCCESS -eq 0 ]]; then
+  echo "⚠ Migrations failed after $MIGRATE_RETRIES attempts"
+  echo "  You can retry manually later with:"
+  echo "  cd $APP_DIR && source .env && ./.venv/bin/python manage.py migrate"
+fi
+
+sudo -u "$APP_USER" "$APP_DIR/.venv/bin/python" "$APP_DIR/manage.py" collectstatic --noinput 2>&1 | tail -5
 
 echo "[8/10] Configuring Gunicorn service..."
 cat > /etc/systemd/system/vinektech.service <<EOF
@@ -233,8 +242,26 @@ systemctl reload nginx
 echo "[10/10] Issuing SSL certificate..."
 certbot --nginx -d "$DOMAIN" -d "www.$DOMAIN" --non-interactive --agree-tos -m "$EMAIL" --redirect || true
 
-echo "Done."
-echo "Next steps:"
+echo ""
+echo "======================================="
+echo "  Setup completed (with caveats)"
+echo "======================================="
+echo ""
+echo "NEXT STEPS:"
+echo ""
 echo "1) Fill real values in $APP_DIR/.env"
-echo "2) Re-run if needed with systemctl restart vinektech && systemctl reload nginx"
-echo "3) Set Stripe webhook later when you finish payment config"
+echo "   - EMAIL credentials (SMTP)"
+echo "   - Stripe keys (STRIPE_PUBLIC_KEY, STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET)"
+echo "   - DJANGO_SECRET_KEY (already auto-generated)"
+echo ""
+echo "2) If migrations failed, run them manually:"
+echo "   cd $APP_DIR"
+echo "   source .env"
+echo "   ./.venv/bin/python manage.py migrate"
+echo ""
+echo "3) Then restart the application:"
+echo "   systemctl restart vinektech && systemctl reload nginx"
+echo ""
+echo "4) Test by visiting: https://$DOMAIN"
+echo ""
+echo "======================================="
