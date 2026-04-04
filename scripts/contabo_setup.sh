@@ -15,7 +15,7 @@ set -euo pipefail
 #   --no-postgres   (if you will manage DB elsewhere)
 
 REPO_URL=""
-BRANCH="main"
+BRANCH="master"
 DOMAIN=""
 EMAIL=""
 APP_USER="vinektech"
