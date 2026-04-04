@@ -59,12 +59,16 @@ if [[ "$INSTALL_POSTGRES" -eq 1 ]]; then
   sleep 3
   
   echo "  Configuring PostgreSQL to listen on TCP..."
-  sudo -u postgres psql -c "ALTER SYSTEM SET listen_addresses = '*';"
+  sudo -u postgres psql -c "ALTER SYSTEM SET listen_addresses = 'localhost';" 2>/dev/null || true
   
-  # Configure pg_hba.conf to allow localhost connections
-  PG_HBA=$(sudo -u postgres psql -t -c "SHOW hba_file;")
-  if ! grep -q "host.*vinektech.*127.0.0.1" "$PG_HBA"; then
-    echo "host    vinektech    vinektech    127.0.0.1/32    md5" | sudo tee -a "$PG_HBA" > /dev/null
+  # Get pg_hba.conf location - handle case where it might not exist yet
+  PG_HBA=$(sudo -u postgres psql -t -c "SHOW hba_file;" 2>/dev/null | tr -d ' ' | tr -d '\n') || PG_HBA="/etc/postgresql/16/main/pg_hba.conf"
+  
+  # Only modify pg_hba.conf if it exists
+  if [[ -f "$PG_HBA" ]]; then
+    if ! grep -q "host.*vinektech.*127.0.0.1" "$PG_HBA"; then
+      echo "host    vinektech    vinektech    127.0.0.1/32    scram-sha-256" | sudo tee -a "$PG_HBA" > /dev/null
+    fi
   fi
   
   echo "  Generating secure database password..."
@@ -79,7 +83,7 @@ PSQL_EOF
   
   echo "  Restarting PostgreSQL with new config..."
   systemctl restart postgresql
-  sleep 2
+  sleep 3
   
   echo "  ✓ PostgreSQL setup complete. DB password will be in .env"
 else
