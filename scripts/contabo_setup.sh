@@ -55,6 +55,18 @@ if [[ "$INSTALL_POSTGRES" -eq 1 ]]; then
   systemctl start postgresql
   systemctl enable postgresql
   
+  # Wait for PostgreSQL to be ready
+  sleep 3
+  
+  echo "  Configuring PostgreSQL to listen on TCP..."
+  sudo -u postgres psql -c "ALTER SYSTEM SET listen_addresses = '*';"
+  
+  # Configure pg_hba.conf to allow localhost connections
+  PG_HBA=$(sudo -u postgres psql -t -c "SHOW hba_file;")
+  if ! grep -q "host.*vinektech.*127.0.0.1" "$PG_HBA"; then
+    echo "host    vinektech    vinektech    127.0.0.1/32    md5" | sudo tee -a "$PG_HBA" > /dev/null
+  fi
+  
   echo "  Generating secure database password..."
   DB_PASSWORD=$(openssl rand -base64 16)
   
@@ -65,7 +77,11 @@ CREATE DATABASE vinektech OWNER vinektech;
 GRANT ALL PRIVILEGES ON DATABASE vinektech TO vinektech;
 PSQL_EOF
   
-  echo "  PostgreSQL setup complete. DB password will be in .env"
+  echo "  Restarting PostgreSQL with new config..."
+  systemctl restart postgresql
+  sleep 2
+  
+  echo "  ✓ PostgreSQL setup complete. DB password will be in .env"
 else
   DB_PASSWORD="change-me-manually"
 fi
