@@ -284,6 +284,18 @@ a {
     background: linear-gradient(135deg, rgba(216, 255, 64, 0.15), rgba(255, 205, 92, 0.2));
     border: 2px solid rgba(216, 255, 64, 0.8);
     box-shadow: 0 0 30px rgba(216, 255, 64, 0.4), inset 0 0 20px rgba(216, 255, 64, 0.1);
+    min-height: 600px;
+    padding: 24px;
+}
+
+.featured-grid > .featured-hero p {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #f5f3ee;
+    margin: 30px 0;
 }
 
 .product-card {
