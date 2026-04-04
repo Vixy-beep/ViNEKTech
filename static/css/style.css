@@ -292,10 +292,14 @@ a {
     flex-grow: 1;
     display: flex;
     align-items: center;
-    font-size: 1.1rem;
-    line-height: 1.6;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 600;
+    line-height: 1.8;
     color: #f5f3ee;
-    margin: 30px 0;
+    margin: 40px 0;
+    letter-spacing: 0.02em;
 }
 
 .product-card {
