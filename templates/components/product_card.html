@@ -16,6 +16,9 @@
         {% endif %}
     </div>
     <span class="tier-badge">{{ product.get_tier_display }}</span>
+    {% if product.is_featured %}
+        <span class="tier-badge tier-featured">⭐ DESTACADO</span>
+    {% endif %}
     {% if product.is_bestseller %}
         <span class="tier-badge tier-hot">Mas vendido</span>
     {% endif %}

@@ -353,6 +353,24 @@ a {
     font-size: 0.76rem;
 }
 
+.tier-featured {
+    animation: glow-pulse 2s ease-in-out infinite;
+    background: rgba(216, 255, 64, 0.25) !important;
+    border: 1.5px solid rgba(216, 255, 64, 0.8) !important;
+    color: #d8ff40 !important;
+    font-weight: 700;
+    box-shadow: 0 0 12px rgba(216, 255, 64, 0.6), inset 0 0 8px rgba(216, 255, 64, 0.2);
+}
+
+@keyframes glow-pulse {
+    0%, 100% {
+        box-shadow: 0 0 12px rgba(216, 255, 64, 0.6), inset 0 0 8px rgba(216, 255, 64, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(216, 255, 64, 0.9), inset 0 0 12px rgba(216, 255, 64, 0.4);
+    }
+}
+
 .price {
     font-family: "Orbitron", sans-serif;
     font-size: 1.3rem;
